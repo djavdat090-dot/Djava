@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Djava Tech — Computers & Electronics</title>
+  <meta name="description" content="Djava Tech: laptops, desktops, monitors, components and accessories.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="Djava Tech home">
+        <span class="logo-mark">D</span><span>Djava<b>Tech</b></span>
+      </a>
+      <div class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="search" type="search" placeholder="Search laptops, GPUs, monitors…" aria-label="Search products">
+      </div>
+      <button class="cart-btn" id="cartOpen" aria-label="Open cart">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Winter Tech Sale · up to 25% off</p>
+          <h1>Power up your setup.</h1>
+          <p class="lead">Laptops, gaming rigs, monitors and components — hand-picked, tested, and shipped free on orders over $99.</p>
+          <div class="hero-cta">
+            <a href="#shop" class="btn btn-primary">Shop now</a>
+            <a href="#shop" class="btn btn-ghost" data-jump="Laptops">Browse laptops</a>
+          </div>
+          <ul class="perks">
+            <li>Free shipping $99+</li>
+            <li>2-year warranty</li>
+            <li>30-day returns</li>
+          </ul>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 400 300">
+            <defs>
+              <linearGradient id="scr" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#6d5dfc"/><stop offset="1" stop-color="#22d3ee"/>
+              </linearGradient>
+            </defs>
+            <rect x="60" y="30" width="280" height="175" rx="12" fill="#0f172a"/>
+            <rect x="72" y="42" width="256" height="151" rx="6" fill="url(#scr)"/>
+            <path d="M30 215h340l-22 28H52z" fill="#334155"/>
+            <rect x="170" y="220" width="60" height="6" rx="3" fill="#64748b"/>
+            <g fill="#fff" opacity=".9">
+              <rect x="92" y="62" width="110" height="10" rx="5"/>
+              <rect x="92" y="82" width="70" height="8" rx="4" opacity=".7"/>
+              <rect x="92" y="130" width="60" height="44" rx="6" opacity=".35"/>
+              <rect x="160" y="110" width="60" height="64" rx="6" opacity=".5"/>
+              <rect x="228" y="90" width="80" height="84" rx="6" opacity=".7"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section id="shop" class="container shop">
+      <div class="shop-head">
+        <h2>Shop all products</h2>
+        <label class="sort">Sort
+          <select id="sort">
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="rating">Top rated</option>
+          </select>
+        </label>
+      </div>
+      <div class="chips" id="categories" role="tablist" aria-label="Categories"></div>
+      <p class="result-count" id="resultCount"></p>
+      <div class="grid" id="products"></div>
+    </section>
+
+    <section class="container features">
+      <div class="feature"><h3>Expert support</h3><p>Real technicians, 7 days a week, to help you pick the right build.</p></div>
+      <div class="feature"><h3>Custom PC builds</h3><p>Choose your parts and we'll assemble, cable-manage and stress-test it.</p></div>
+      <div class="feature"><h3>Trade-in program</h3><p>Get credit for your old devices toward something new.</p></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><span class="logo"><span class="logo-mark">D</span><span>Djava<b>Tech</b></span></span>
+        <p>Computers & electronics for work and play.</p></div>
+      <form class="newsletter" id="newsletter">
+        <label for="email">Get deals in your inbox</label>
+        <div><input id="email" type="email" required placeholder="you@example.com"><button class="btn btn-primary">Subscribe</button></div>
+      </form>
+    </div>
+    <p class="container copyright">© <span id="year"></span> Djava Tech. Demo store — no real payments are processed.</p>
+  </footer>
+
+  <!-- Product modal -->
+  <dialog id="productModal" class="modal"></dialog>
+
+  <!-- Cart drawer -->
+  <div class="overlay" id="overlay" hidden></div>
+  <aside class="drawer" id="cart" aria-label="Shopping cart" aria-hidden="true">
+    <div class="drawer-head">
+      <h2>Your cart</h2>
+      <button class="icon-btn" id="cartClose" aria-label="Close cart">✕</button>
+    </div>
+    <div class="drawer-body" id="cartItems"></div>
+    <div class="drawer-foot" id="cartFoot"></div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
