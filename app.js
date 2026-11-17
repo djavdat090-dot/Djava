@@ -190,13 +190,13 @@ function renderCheckout() {
     <form class="form" id="checkoutForm">
       <h3>Shipping details</h3>
       <input required name="name" placeholder="Full name" autocomplete="name">
-      <input required type="email" name="email" placeholder="Email" autocomplete="email">
+      <input required type="email" name="email" placeholder="Email" autocomplete="email" inputmode="email">
       <input required name="address" placeholder="Street address" autocomplete="street-address">
-      <div class="two"><input required name="city" placeholder="City"><input required name="zip" placeholder="ZIP / Postal code"></div>
+      <div class="two"><input required name="city" placeholder="City" autocomplete="address-level2"><input required name="zip" placeholder="ZIP / Postal code" autocomplete="postal-code"></div>
       <h3>Payment</h3>
       <p class="row" style="font-size:.85rem">Demo store — no card is charged and no payment data is stored.</p>
-      <input required name="card" placeholder="Card number (demo)" inputmode="numeric" pattern="[0-9 ]{12,23}">
-      <div class="two"><input required name="exp" placeholder="MM/YY" pattern="(0[1-9]|1[0-2])/[0-9]{2}"><input required name="cvc" placeholder="CVC" inputmode="numeric" pattern="[0-9]{3,4}"></div>
+      <input required name="card" placeholder="Card number (demo)" inputmode="numeric" autocomplete="cc-number" pattern="[0-9 ]{12,23}">
+      <div class="two"><input required name="exp" placeholder="MM/YY" inputmode="numeric" autocomplete="cc-exp" pattern="(0[1-9]|1[0-2])/[0-9]{2}"><input required name="cvc" placeholder="CVC" inputmode="numeric" autocomplete="cc-csc" pattern="[0-9]{3,4}"></div>
     </form>`;
   $('#cartFoot').innerHTML = `
     <div class="row total"><span>Total</span><span>${money(t.total)}</span></div>
@@ -216,12 +216,15 @@ function renderCheckout() {
 
 function openCart() {
   renderCart();
+  $('#toast').classList.remove('show');
   $('#cart').classList.add('open'); $('#cart').setAttribute('aria-hidden', 'false');
   $('#overlay').hidden = false;
+  document.body.classList.add('locked');
 }
 function closeCart() {
   $('#cart').classList.remove('open'); $('#cart').setAttribute('aria-hidden', 'true');
   $('#overlay').hidden = true;
+  document.body.classList.remove('locked');
 }
 
 let toastTimer;
@@ -255,11 +258,32 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart();
 $('#search').addEventListener('input', e => {
   state.query = e.target.value;
   renderProducts();
-  if (state.query) document.getElementById('shop').scrollIntoView({ block: 'start' });
+  const shop = document.getElementById('shop');
+  if (state.query && shop.getBoundingClientRect().top > window.innerHeight * 0.6) shop.scrollIntoView({ block: 'start' });
 });
 $('#sort').onchange = e => { state.sort = e.target.value; renderProducts(); };
 $('#newsletter').onsubmit = e => { e.preventDefault(); e.target.reset(); toast('Thanks for subscribing!'); };
 $('#year').textContent = new Date().getFullYear();
+
+// Swipe right to close the cart on touch screens
+let touchX = null;
+$('#cart').addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+$('#cart').addEventListener('touchend', e => {
+  if (touchX !== null && e.changedTouches[0].clientX - touchX > 80) closeCart();
+  touchX = null;
+});
+// Swipe down on the product sheet to close it
+let sheetY = null;
+$('#productModal').addEventListener('touchstart', e => { sheetY = $('#productModal').scrollTop === 0 ? e.touches[0].clientY : null; }, { passive: true });
+$('#productModal').addEventListener('touchend', e => {
+  if (sheetY !== null && e.changedTouches[0].clientY - sheetY > 100) $('#productModal').close();
+  sheetY = null;
+});
+
+// Installable app + offline support (only works when served over http/https)
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
 
 renderCategories();
 renderProducts();
