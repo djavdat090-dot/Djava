@@ -151,6 +151,7 @@ function renderProducts() {
       <button class="card-media" style="background:var(--photo-bg)" data-view="${p.id}" aria-label="View ${p.brand} ${p.name}">
         <span class="brand-tag">${p.brand}</span>
         ${p.was ? `<span class="badge">-${Math.round((1 - p.price / p.was) * 100)}%</span>` : ''}
+        ${p.colors.length > 1 ? `<span class="colors-pill"><i style="background:conic-gradient(${p.colors.map((c, i, a) => `${c.hex} ${i / a.length * 360}deg ${(i + 1) / a.length * 360}deg`).join(',')})"></i>${p.colors.length} colors</span>` : ''}
         ${media(p, ci)}
       </button>
       <div class="card-body">
@@ -413,7 +414,7 @@ $('#productModal').addEventListener('touchend', e => {
 
 // Installable app + offline support (only works when served over http/https)
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
-  navigator.serviceWorker.register('sw.js').catch(() => {});
+  navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(r => r.update()).catch(() => {});
 }
 
 renderBrands();
