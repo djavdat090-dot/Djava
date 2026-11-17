@@ -1,11 +1,12 @@
 # Djava Tech
 
-A static storefront for computers, phones, consoles and electronics from brands like Apple, ASUS, Samsung, Sony, Microsoft, Nintendo, Valve, Dell, Lenovo, HP, Google, NVIDIA, AMD and Logitech.
+A static storefront with 125+ computers, phones, tablets, watches, consoles and accessories from brands like Apple, Samsung, Xiaomi, vivo, Lenovo, ASUS, Sony, Microsoft, Nintendo, Valve, Google, Dell, HP, NVIDIA, AMD and Logitech.
 
 ## Features
 - Product catalog with brand and category filters, live search, and sorting
 - "Shop by brand" section
 - Color options: customers pick a color on the card or product page and the picture changes
+- Tablets (iPad, Galaxy Tab, Xiaomi Pad, Surface Pro) and wearables (Apple Watch, Galaxy Watch, Pixel Watch, Garmin, Xiaomi)
 - Gaming: PlayStation, Xbox, Nintendo Switch, Steam Deck, ROG Xbox Ally and controllers
 - Product detail modal with specs and quantity picker
 - Cart drawer saved in the browser (localStorage), with shipping and tax totals

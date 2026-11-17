@@ -1,5 +1,5 @@
 // Djava Tech admin: add, edit and delete products, then publish products.js to GitHub.
-const CATEGORIES = ['Laptops', 'Desktops', 'Monitors', 'Components', 'Phones', 'Audio', 'Gaming', 'Accessories'];
+const CATEGORIES = ['Laptops', 'Desktops', 'Monitors', 'Phones', 'Tablets', 'Wearables', 'Audio', 'Gaming', 'Components', 'Accessories'];
 const DRAFT_KEY = 'djava-admin-draft';
 const CONN_KEY = 'djava-admin-conn';
 const FILE_PATH = 'products.js';

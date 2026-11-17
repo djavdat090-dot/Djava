@@ -357,3 +357,14 @@ button, a, .chip { -webkit-tap-highlight-color: transparent; touch-action: manip
   font-size: .75rem; font-weight: 700; box-shadow: 0 1px 4px rgba(15, 23, 42, .15);
 }
 .colors-pill i { width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15); }
+.more { display: flex; justify-content: center; margin-top: 24px; }
+.more:empty { display: none; }
+.more .btn { min-width: 240px; }
+.brand-strip { grid-template-columns: repeat(8, 1fr); }
+@media (max-width: 860px) {
+  .brand-strip { grid-template-columns: none; grid-auto-flow: column; grid-template-rows: repeat(2, auto); grid-auto-columns: 128px;
+    overflow-x: auto; scrollbar-width: none; margin-inline: -16px; padding: 4px 16px 8px; scroll-snap-type: x proximity; }
+  .brand-strip::-webkit-scrollbar { display: none; }
+  .brand-tile { scroll-snap-align: start; }
+}
+@media (max-width: 560px) { .brand-strip { grid-auto-columns: 104px; } }

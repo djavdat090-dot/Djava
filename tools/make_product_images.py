@@ -182,6 +182,12 @@ def phone(color, wp1, wp2, camera):
         g += lens(223, 48, 10) + lens(223, 74, 10) + '<circle cx="250" cy="44" r="3" fill="#fef3c7"/>'
     elif camera == 'vertical':
         g += lens(226, 44, 11) + lens(226, 72, 11) + lens(226, 100, 11) + lens(254, 50, 7) + '<circle cx="254" cy="72" r="3.5" fill="#fef3c7"/>'
+    elif camera == 'single':
+        g += '<rect x="200" y="28" width="116" height="38" rx="19" fill="#000" opacity=".14"/>'
+        g += lens(222, 47, 11) + '<circle cx="246" cy="47" r="3" fill="#fef3c7"/>'
+    elif camera == 'round':
+        g += '<circle cx="258" cy="66" r="40" fill="#000" opacity=".18"/>'
+        g += lens(240, 52, 10) + lens(276, 52, 10) + lens(258, 84, 10) + '<circle cx="258" cy="40" r="3" fill="#fef3c7"/>'
     elif camera == 'bar':
         g += '<rect x="194" y="52" width="128" height="34" rx="17" fill="#111827"/>'
         g += lens(222, 69, 10) + lens(250, 69, 10) + lens(282, 69, 8) + '<circle cx="303" cy="69" r="3" fill="#fef3c7"/>'
@@ -211,8 +217,8 @@ def gpu(shroud, accent, fans=3):
     return svg(g, defs)
 
 
-def cpu():
-    defs = lin('ihs', '#f1f5f9', '#94a3b8', 1, 1) + lin('sub', '#166534', '#14532d', 1, 1)
+def cpu(sub=('#166534', '#14532d')):
+    defs = lin('ihs', '#f1f5f9', '#94a3b8', 1, 1) + lin('sub', sub[0], sub[1], 1, 1)
     g = shadow(200, 252, 120, 12)
     g += '<g transform="translate(200 145) rotate(-8) translate(-200 -145)">'
     g += '<rect x="90" y="40" width="220" height="210" rx="10" fill="url(#sub)"/>'
@@ -489,6 +495,140 @@ def gamepad(body='#f8fafc', accent='#111827', style='sony'):
         g += f'<circle cx="200" cy="120" r="10" fill="{accent}" stroke="#e5e7eb" stroke-width="2"/>'
     return svg(g, defs)
 
+
+# ---------- More product types ----------
+def tablet(body, wp1='#6366f1', wp2='#06b6d4', camera=1, size=1.0):
+    defs = lin('tb', light(body, .12), dark(body, .2), 1, 1)
+    w, h = 250 * size, 176 * size
+    x, y = 200 - w / 2 + 26, 150 - h / 2 + 4
+    screen, wpdefs = wallpaper(x + 8, y + 8, w - 16, h - 16, wp1, wp2, 6)
+    g = shadow(205, 262, 150 * size + 20, 10)
+    # back, peeking out behind
+    g += f'<g transform="rotate(-10 {x + 20} {y})"><rect x="{x - 44}" y="{y - 6}" width="{w}" height="{h}" rx="{18 * size}" fill="url(#tb)"/>'
+    g += f'<rect x="{x - 34}" y="{y + 4}" width="{30 if camera > 1 else 20}" height="{30 if camera > 1 else 20}" rx="7" fill="#000" opacity=".2"/>'
+    g += f'<circle cx="{x - 24}" cy="{y + 14}" r="5" fill="#0b0f19"/>' + (f'<circle cx="{x - 12}" cy="{y + 26}" r="4" fill="#0b0f19"/>' if camera > 1 else '') + '</g>'
+    # front
+    g += f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{18 * size}" fill="#0b0f19"/>'
+    g += f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{18 * size}" fill="none" stroke="{body}" stroke-width="3"/>'
+    g += screen
+    return svg(g, defs + wpdefs)
+
+
+def pencil_svg():
+    defs = lin('pen', '#ffffff', '#cbd5e1')
+    g = shadow(200, 214, 160, 8)
+    g += '<g transform="rotate(-14 200 150)">'
+    g += '<rect x="50" y="138" width="290" height="22" rx="11" fill="url(#pen)" stroke="#cbd5e1"/>'
+    g += '<path d="M340 138 L378 149 L340 160Z" fill="#e2e8f0"/><path d="M366 145.5 L378 149 L366 152.5Z" fill="#475569"/>'
+    g += '<rect x="56" y="141" width="18" height="16" rx="6" fill="#e2e8f0"/><rect x="250" y="138" width="40" height="6" rx="3" fill="#94a3b8" opacity=".5"/>'
+    g += '</g>'
+    return svg(g, defs)
+
+
+def watch(case, band, shape='square', accent=None):
+    defs = lin('band', light(band, .1), dark(band, .25)) + lin('case', light(case, .25), dark(case, .25), 1, 1)
+    defs += lin('face', '#1e1b4b', '#0b0f19', 1, 1)
+    g = shadow(200, 278, 70, 8)
+    g += '<path d="M160 14 H240 L232 92 H168Z" fill="url(#band)"/><path d="M168 208 H232 L240 286 H160Z" fill="url(#band)"/>'
+    if shape == 'square':
+        g += '<rect x="132" y="72" width="136" height="156" rx="40" fill="url(#case)"/>'
+        g += '<rect x="142" y="82" width="116" height="136" rx="32" fill="#000"/>'
+        cx, cy = 200, 150
+        g += f'<rect x="268" y="112" width="10" height="24" rx="4" fill="{accent or dark(case, .2)}"/><rect x="268" y="150" width="6" height="30" rx="3" fill="{dark(case, .2)}"/>'
+    else:
+        g += '<circle cx="200" cy="150" r="76" fill="url(#case)"/><circle cx="200" cy="150" r="64" fill="#000"/>'
+        cx, cy = 200, 150
+        g += f'<rect x="274" y="128" width="10" height="20" rx="4" fill="{dark(case, .2)}"/><rect x="274" y="156" width="8" height="16" rx="3" fill="{dark(case, .2)}"/>'
+    for r, c, frac in ((44, '#f43f5e', .78), (34, '#a3e635', .6), (24, '#22d3ee', .45)):
+        circ = 2 * math.pi * r
+        g += f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{c}" stroke-opacity=".25" stroke-width="8"/>'
+        g += (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="{c}" stroke-width="8" stroke-linecap="round" '
+              f'stroke-dasharray="{circ * frac:.1f} {circ:.1f}" transform="rotate(-90 {cx} {cy})"/>')
+    return svg(g, defs)
+
+
+def foldable(color):
+    defs = lin('body', light(color, .15), dark(color, .25), 1, 1) + lin('glass', '#334155', '#0f172a', 1, 1)
+    screen, wpdefs = wallpaper(66, 40, 196, 220, '#6366f1', '#ec4899', 10)
+    g = shadow(210, 278, 150, 9)
+    # folded phone behind (back side)
+    g += '<g transform="rotate(8 300 150)"><rect x="252" y="30" width="96" height="240" rx="18" fill="url(#body)"/>'
+    for cy in (58, 88, 118):
+        g += f'<circle cx="276" cy="{cy}" r="11" fill="#0b0f19" stroke="{dark(color, .3)}" stroke-width="2.5"/><circle cx="276" cy="{cy}" r="5.5" fill="url(#glass)"/>'
+    g += '</g>'
+    # open phone
+    g += '<rect x="58" y="32" width="212" height="236" rx="16" fill="#0b0f19" stroke="url(#body)" stroke-width="4"/>' + screen
+    g += '<path d="M164 40 V260" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>'
+    return svg(g, defs + wpdefs)
+
+
+def flip(color):
+    defs = lin('body', light(color, .15), dark(color, .25), 1, 1) + lin('wp', '#f59e0b', '#ec4899', 1, 1)
+    g = shadow(205, 278, 140, 9)
+    # open (tall) flip phone
+    g += '<g transform="rotate(-8 140 150)"><rect x="86" y="18" width="110" height="262" rx="20" fill="#0b0f19" stroke="url(#body)" stroke-width="4"/>'
+    g += '<rect x="93" y="25" width="96" height="248" rx="15" fill="url(#wp)"/><path d="M93 149 H189" stroke="#fff" stroke-opacity=".2" stroke-width="2"/>'
+    g += '<circle cx="141" cy="36" r="4" fill="#0b0f19"/></g>'
+    # closed flip phone with cover screen
+    g += '<rect x="216" y="104" width="124" height="134" rx="22" fill="url(#body)"/>'
+    g += '<rect x="224" y="112" width="108" height="86" rx="14" fill="#0b0f19"/>'
+    g += '<circle cx="246" cy="134" r="10" fill="#111827" stroke="#334155" stroke-width="2"/><circle cx="276" cy="134" r="10" fill="#111827" stroke="#334155" stroke-width="2"/>'
+    g += '<rect x="290" y="150" width="34" height="38" rx="8" fill="#6366f1" opacity=".75"/>'
+    return svg(g, defs)
+
+
+def speaker(color):
+    defs = lin('sp', light(color, .15), dark(color, .3))
+    g = shadow(200, 232, 150, 10)
+    g += '<rect x="56" y="110" width="288" height="114" rx="57" fill="url(#sp)"/>'
+    for i in range(22):
+        for j in range(5):
+            g += f'<circle cx="{104 + i * 9}" cy="{134 + j * 16}" r="2.2" fill="#000" opacity=".22"/>'
+    g += f'<ellipse cx="60" cy="167" rx="16" ry="48" fill="{dark(color, .45)}"/><ellipse cx="60" cy="167" rx="9" ry="30" fill="{dark(color, .2)}"/>'
+    g += f'<ellipse cx="340" cy="167" rx="16" ry="48" fill="{dark(color, .45)}"/><ellipse cx="340" cy="167" rx="9" ry="30" fill="{dark(color, .2)}"/>'
+    g += '<rect x="170" y="106" width="60" height="8" rx="4" fill="#000" opacity=".35"/>'
+    g += '<path d="M90 122 Q200 104 310 122" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="5" stroke-linecap="round"/>'
+    return svg(g, defs)
+
+
+def vr_headset(color, strap='#1f2937'):
+    defs = lin('vr', light(color, .2), dark(color, .2), 1, 1)
+    g = shadow(200, 252, 150, 10)
+    g += f'<path d="M58 150 Q30 80 200 74 Q370 80 342 150" fill="none" stroke="{strap}" stroke-width="16" stroke-linecap="round"/>'
+    g += '<rect x="68" y="104" width="264" height="132" rx="56" fill="url(#vr)"/>'
+    g += '<rect x="68" y="104" width="264" height="132" rx="56" fill="none" stroke="#000" stroke-opacity=".12" stroke-width="2"/>'
+    for cx in (124, 276):
+        g += f'<rect x="{cx - 26}" y="150" width="52" height="40" rx="20" fill="#0b0f19"/>'
+        g += f'<circle cx="{cx - 8}" cy="170" r="8" fill="#1e293b"/><circle cx="{cx + 10}" cy="170" r="5" fill="#334155"/>'
+    g += '<circle cx="200" cy="130" r="5" fill="#0b0f19"/>'
+    return svg(g, defs)
+
+
+def portal(body='#f8fafc'):
+    screen, wpdefs = wallpaper(124, 96, 152, 96, '#2563eb', '#0f172a', 3)
+    defs = lin('gp', light(body, .1), dark(body, .15), 1, 1)
+    g = shadow(200, 262, 170, 10)
+    shape = ('M100 112 Q124 100 140 100 H260 Q276 100 300 112 C342 118 362 160 370 206 C376 244 350 264 324 250 '
+             'C304 240 292 218 272 208 H128 C108 218 96 240 76 250 C50 264 24 244 30 206 C38 160 58 118 100 112Z')
+    g += f'<path d="{shape}" fill="url(#gp)" stroke="#000" stroke-opacity=".12" stroke-width="2"/>'
+    g += '<rect x="116" y="88" width="168" height="112" rx="8" fill="#0b0f19"/>' + screen
+    g += _dpad(78, 150, 6, '#1f2937') + _abxy(322, 150, 14, 6, '#1f2937') + _stick(118, 222, 13) + _stick(282, 222, 13)
+    return svg(g, defs + wpdefs)
+
+
+def studio(top=('#f1f5f9', '#cbd5e1'), side=('#cbd5e1', '#94a3b8')):
+    defs = lin('top', top[0], top[1], 1, 1) + lin('front', side[0], side[1])
+    g = shadow(200, 248, 140, 14)
+    g += '<path d="M80 120 L200 86 L320 120 L200 154Z" fill="url(#top)"/>'
+    g += '<path d="M80 120 L200 154 V238 L80 204Z" fill="url(#front)"/>'
+    g += '<path d="M200 154 L320 120 V204 L200 238Z" fill="url(#front)" opacity=".8"/>'
+    g += '<path d="M80 120 L200 86 L320 120" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="1.5"/>'
+    g += '<path d="M104 150 l10 3 v8 l-10 -3Z M122 155 l10 3 v8 l-10 -3Z" fill="#1f2937" opacity=".45"/>'
+    g += '<path d="M150 176 l24 7 v4 l-24 -7Z" fill="#1f2937" opacity=".4"/><circle cx="186" cy="214" r="2" fill="#f8fafc"/>'
+    for i in range(6):
+        g += f'<circle cx="{166 + i * 14}" cy="{120}" r="2" fill="#94a3b8"/>'
+    return svg(g, defs)
+
 SILVER = ('#e5e7eb', '#9ca3af')
 SPACE = ('#4b5563', '#1f2937')
 GRAPHITE = ('#374151', '#111827')
@@ -594,6 +734,127 @@ VARIANTS = {
     44: ('xbox-controller', [('Carbon Black', '#1f2937|#111827'), ('Robot White', '#f1f5f9|#e5e7eb'), ('Shock Blue', '#2563eb|#1e3a8a'), ('Pulse Red', '#dc2626|#7f1d1d')],
         lambda c: gamepad(*c.split('|'), style='xbox')),
 }
+
+
+# ---------- Wider range ----------
+IMAGES.update({
+    47: ('rog-strix-scar-18.svg', laptop(BLACK, '#22d3ee', '#7c3aed', 'gaming')),
+    50: ('razer-blade-16.svg', laptop(('#27272a', '#09090b'), '#22c55e', '#052e16', 'gaming')),
+    52: ('swift-go-14.svg', laptop(SILVER, '#14b8a6', '#1e3a8a')),
+    53: ('alienware-16-area-51.svg', laptop(('#334155', '#0f172a'), '#38bdf8', '#312e81', 'gaming')),
+    54: ('mac-studio.svg', studio()),
+    55: ('mac-mini-m4-pro.svg', mini_pc(('#f1f5f9', '#cbd5e1'), ('#cbd5e1', '#94a3b8'))),
+    56: ('omen-35l.svg', tower(('#18181b', '#09090b'), ('#ef4444', '#f87171'))),
+    57: ('lg-ultragear-oled-27.svg', monitor('#ec4899', '#1e1b4b', stand='#3f3f46')),
+    58: ('viewfinity-s9.svg', monitor('#0ea5e9', '#e0f2fe', stand='#cbd5e1', ratio=(300, 176))),
+    59: ('pro-display-xdr.svg', monitor('#7c3aed', '#020617', stand='#e2e8f0', ratio=(310, 182), y=20)),
+    60: ('alienware-34-qd-oled.svg', ultrawide('#0ea5e9', '#1e1b4b')),
+    82: ('airpods-4.svg', earbuds(('#ffffff', '#e2e8f0'), ('#ffffff', '#cbd5e1'))),
+    89: ('dualsense-edge.svg', gamepad('#f8fafc', '#0b0f19')),
+    90: ('switch-2-mario-kart-bundle.svg', switch2('#ef4444', '#ef4444')),
+    91: ('xbox-series-x-digital.svg', xbox_x('#e5e7eb')),
+    92: ('steam-deck-lcd.svg', handheld('#27272a', ('#64748b', '#1e293b'))),
+    93: ('meta-quest-3.svg', vr_headset('#f8fafc', '#1f2937')),
+    94: ('meta-quest-3s.svg', vr_headset('#e5e7eb', '#334155')),
+    95: ('switch-2-pro-controller.svg', gamepad('#27272a', '#0b0f19', 'xbox')),
+    96: ('rtx-5080.svg', gpu(('#52525b', '#18181b'), '#a3e635', 2)),
+    97: ('rtx-5060-ti.svg', gpu(('#3f3f46', '#18181b'), '#38bdf8', 2)),
+    98: ('radeon-rx-9070-xt.svg', gpu(('#27272a', '#09090b'), '#ef4444', 3)),
+    99: ('ryzen-9-9950x3d.svg', cpu()),
+    100: ('core-ultra-9-285k.svg', cpu(('#1e3a8a', '#172554'))),
+    101: ('samsung-9100-pro.svg', ssd(heatsink=True)),
+    102: ('wd-black-sn850x.svg', ssd()),
+    103: ('trident-z5-rgb.svg', ram(('#d4d4d8', '#71717a'), '#a855f7')),
+    107: ('mx-mechanical.svg', keyboard(('#3f3f46', '#18181b'), '#27272a', numpad=True, mech=False)),
+    108: ('apple-pencil-pro.svg', pencil_svg()),
+})
+CATEGORY_DEFAULTS['tablet.svg'] = tablet('#94a3b8')
+CATEGORY_DEFAULTS['wearable.svg'] = watch('#94a3b8', '#334155')
+
+VARIANTS.update({
+    45: ('macbook-air-15', VARIANTS[1][1], lambda c: laptop(pair(c), '#22d3ee', '#4338ca')),
+    46: ('macbook-pro-16', [('Space Black', '#2b2b2e'), ('Silver', '#dcdee1')], lambda c: laptop(pair(c), '#f97316', '#7c2d12')),
+    48: ('vivobook-s14', [('Neutral Black', '#2d2f33'), ('Cool Silver', '#cfd3d8')], lambda c: laptop(pair(c), '#8b5cf6', '#0ea5e9')),
+    49: ('yoga-slim-7x', [('Cosmic Blue', '#334a73'), ('Luna Grey', '#9ea3a8')], lambda c: laptop(pair(c), '#38bdf8', '#0f172a')),
+    51: ('galaxy-book5-pro', [('Gray', '#4b5058'), ('Silver', '#d7dade')], lambda c: laptop(pair(c), '#60a5fa', '#312e81')),
+    61: ('iphone-17-pro-max', VARIANTS[18][1], lambda c: phone(pair(c), light(c, .1), '#0f172a', 'square3')),
+    62: ('iphone-air', [('Sky Blue', '#c4dcef'), ('Light Gold', '#eadbbf'), ('Cloud White', '#f4f4f2'), ('Space Black', '#2b2b2e')],
+         lambda c: phone(pair(c), '#38bdf8', '#1e3a8a', 'single')),
+    63: ('iphone-16e', [('White', '#f4f4f2'), ('Black', '#2b2b2e')], lambda c: phone(pair(c), '#f472b6', '#4c1d95', 'single')),
+    64: ('galaxy-s25', [('Icyblue', '#b9d2e6'), ('Navy', '#2c3a5c'), ('Mint', '#bfe3d0'), ('Silver Shadow', '#a5a8ad')],
+         lambda c: phone(pair(c), '#22d3ee', '#1e40af', 'vertical')),
+    65: ('galaxy-s25-edge', [('Titanium Silver', '#c9ccd1'), ('Titanium Jetblack', '#26272b'), ('Titanium Icyblue', '#b6cde0')],
+         lambda c: phone(pair(c), '#a78bfa', '#1e1b4b', 'two')),
+    66: ('galaxy-z-fold7', [('Blue Shadow', '#3b4f73'), ('Silver Shadow', '#a9adb3'), ('Jetblack', '#222326')], foldable),
+    67: ('galaxy-z-flip7', [('Blue Shadow', '#3b4f73'), ('Jetblack', '#222326'), ('Coral Red', '#e2614f')], flip),
+    68: ('pixel-10', [('Obsidian', '#2a2a2c'), ('Frost', '#dbe4ec'), ('Indigo', '#4b4f8f'), ('Lemongrass', '#dfe6a3')],
+         lambda c: phone(pair(c), '#facc15', '#0f766e', 'bar')),
+    69: ('pixel-10-pro-xl', VARIANTS[21][1], lambda c: phone(pair(c), '#60a5fa', '#312e81', 'bar')),
+    70: ('oneplus-13', [('Black Eclipse', '#1f2024'), ('Arctic Dawn', '#e6e4ea'), ('Midnight Ocean', '#22324f')],
+         lambda c: phone(pair(c), '#ef4444', '#450a0a', 'round')),
+    71: ('ipad-pro-11', [('Space Black', '#2b2b2e'), ('Silver', '#dcdee1')], lambda c: tablet(c, '#a855f7', '#0f172a', 2)),
+    72: ('ipad-air-11', [('Space Gray', '#6b6e74'), ('Blue', '#9fb7d6'), ('Purple', '#b9a7d6'), ('Starlight', '#ece3d3')],
+         lambda c: tablet(c, '#38bdf8', '#4338ca')),
+    73: ('ipad-a16', [('Blue', '#8fb3dd'), ('Pink', '#eeb1c0'), ('Yellow', '#f3dc7a'), ('Silver', '#dcdee1')],
+         lambda c: tablet(c, '#f59e0b', '#db2777')),
+    74: ('ipad-mini', [('Space Gray', '#6b6e74'), ('Blue', '#9fb7d6'), ('Purple', '#b9a7d6'), ('Starlight', '#ece3d3')],
+         lambda c: tablet(c, '#22c55e', '#0e7490', 1, .82)),
+    75: ('galaxy-tab-s10-ultra', [('Moonstone Gray', '#5d6168'), ('Platinum Silver', '#d2d5d9')], lambda c: tablet(c, '#6366f1', '#06b6d4', 2, 1.08)),
+    76: ('surface-pro-11', [('Platinum', '#d9d9d6'), ('Sapphire', '#2f4a7a'), ('Dune', '#c8b8a2'), ('Black', '#2a2a2a')],
+         lambda c: tablet(c, '#2563eb', '#93c5fd')),
+    77: ('apple-watch-series-11', [('Jet Black', '#1c1c1e'), ('Rose Gold', '#e6c3b4'), ('Silver', '#d8dadd'), ('Space Gray', '#5f6166')],
+         lambda c: watch(c, dark(c, .1) if c != '#d8dadd' else '#93c5fd')),
+    78: ('apple-watch-ultra-3', [('Natural Titanium', '#c8c2b6'), ('Black Titanium', '#2b2a29')],
+         lambda c: watch(c, '#f97316', 'square', '#f97316')),
+    79: ('galaxy-watch8', [('Graphite', '#3a3b3f'), ('Silver', '#cfd2d6')], lambda c: watch(c, dark(c, .15), 'round')),
+    80: ('pixel-watch-4', [('Matte Black', '#2a2a2c'), ('Polished Silver', '#d6d8db'), ('Champagne Gold', '#e2cfa9')],
+         lambda c: watch(c, '#64748b' if c != '#2a2a2c' else '#111827', 'round')),
+    81: ('forerunner-970', [('Black', '#26272b'), ('White', '#e9eaec')], lambda c: watch('#3f3f46', c, 'round')),
+    83: ('airpods-max', [('Midnight', '#2c3442'), ('Starlight', '#e9e1d2'), ('Blue', '#a9c2dd'), ('Purple', '#c3b2d9'), ('Orange', '#ef9a68')],
+         lambda c: headphones(pair(c), dark(c, .1))),
+    84: ('bose-qc-ultra', [('Black', '#26272b'), ('White Smoke', '#e7e4de'), ('Lunar Blue', '#3c4a63')], lambda c: headphones(pair(c))),
+    85: ('wf-1000xm5', [('Black', '#2a2827'), ('Platinum Silver', '#cfcac2')], lambda c: earbuds(pair(c), (light(c, .3), c))),
+    86: ('beats-studio-pro', [('Black', '#1f1f22'), ('Navy', '#26314d'), ('Sandstone', '#d8c8ae'), ('Deep Brown', '#4a3428')],
+         lambda c: headphones(pair(c), dark(c, .2))),
+    87: ('jbl-flip-7', [('Black', '#26272b'), ('Blue', '#2563eb'), ('Red', '#dc2626'), ('Teal', '#0f9488')], speaker),
+    88: ('playstation-portal', [('White', '#f8fafc'), ('Midnight Black', '#2a2b30')], portal),
+    104: ('magic-mouse', [('White', '#f8fafc'), ('Black', '#27272a')], lambda c: mouse(pair(c), light(c, .3))),
+    105: ('g-pro-x-superlight-2', [('Black', '#26272b'), ('White', '#f1f5f9'), ('Magenta', '#db2777')], lambda c: mouse(pair(c), '#94a3b8')),
+    106: ('deathadder-v3-pro', [('Black', '#1f1f22'), ('White', '#f1f5f9')], lambda c: mouse(pair(c), '#22c55e')),
+})
+
+
+# ---------- Xiaomi, vivo, more Lenovo ----------
+IMAGES.update({
+    121: ('thinkpad-t14s.svg', laptop(BLACK, '#475569', '#0f172a', 'thinkpad')),
+    123: ('legion-tower-7i.svg', tower(('#3f3f46', '#18181b'), ('#f97316', '#fdba74'))),
+    125: ('legion-pro-27q-oled.svg', monitor('#f97316', '#1e1b4b', stand='#3f3f46')),
+})
+VARIANTS.update({
+    109: ('xiaomi-15-ultra', [('Black', '#1f2024'), ('White', '#ecebe8'), ('Silver Chrome', '#bfc3c8')],
+          lambda c: phone(pair(c), '#f59e0b', '#7c2d12', 'round')),
+    110: ('xiaomi-15', [('Black', '#1f2024'), ('White', '#ecebe8'), ('Green', '#9fbfa6')],
+          lambda c: phone(pair(c), '#22c55e', '#14532d', 'square3')),
+    111: ('redmi-note-14-pro-plus', [('Midnight Black', '#1f2024'), ('Frost Blue', '#a9c4de'), ('Lavender Purple', '#b8a6d9')],
+          lambda c: phone(pair(c), '#f97316', '#4c1d95', 'square3')),
+    112: ('xiaomi-pad-7', [('Graphite Gray', '#4a4d52'), ('Sage Green', '#a9bfae'), ('Blue', '#93acd1')],
+          lambda c: tablet(c, '#f97316', '#be185d')),
+    113: ('xiaomi-smart-band-9', [('Midnight Black', '#1f2024'), ('Glacier Silver', '#cdd1d6')],
+          lambda c: watch(c, dark(c, .05), 'square')),
+    114: ('redmi-buds-6-pro', [('Black', '#26272b'), ('White', '#f1f5f9')], lambda c: earbuds(pair(c), (light(c, .3), c))),
+    115: ('xiaomi-watch-s4', [('Black', '#26272b'), ('Silver', '#cfd2d6')], lambda c: watch(c, dark(c, .1), 'round')),
+    116: ('vivo-x200-pro', [('Cosmos Black', '#1f2024'), ('Titanium Grey', '#8c8f93')],
+          lambda c: phone(pair(c), '#0ea5e9', '#1e1b4b', 'round')),
+    117: ('vivo-x-fold5', [('Titanium Grey', '#6b6e73'), ('Feather White', '#ecebe8')], foldable),
+    118: ('vivo-v50', [('Titanium Grey', '#6b6e73'), ('Rose Red', '#d8737f'), ('Starry Blue', '#3b5b9a')],
+          lambda c: phone(pair(c), '#ec4899', '#312e81', 'two')),
+    119: ('vivo-x200-fe', [('Amber Yellow', '#e9c46a'), ('Frost Blue', '#a9c4de'), ('Luxe Grey', '#5c5f64')],
+          lambda c: phone(pair(c), '#facc15', '#0e7490', 'round')),
+    120: ('legion-go-2', [('Eclipse Black', '#26272b'), ('Glacier White', '#e9eaec')],
+          lambda c: handheld(c, ('#f97316', '#7c2d12'), 'ally')),
+    122: ('ideapad-slim-5', [('Cloud Grey', '#a7abb1'), ('Abyss Blue', '#2e3d5c')], lambda c: laptop(pair(c), '#14b8a6', '#1e3a8a')),
+    124: ('lenovo-tab-p12', [('Storm Grey', '#5d6168')], lambda c: tablet(c, '#6366f1', '#0ea5e9', 1, 1.05)),
+})
 
 
 def slug(name):

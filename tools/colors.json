@@ -300,5 +300,793 @@
       "hex": "#dc2626",
       "image": "images/xbox-controller-pulse-red.svg"
     }
+  ],
+  "45": [
+    {
+      "name": "Sky Blue",
+      "hex": "#a9c6df",
+      "image": "images/macbook-air-15-sky-blue.svg"
+    },
+    {
+      "name": "Silver",
+      "hex": "#dfe1e4",
+      "image": "images/macbook-air-15-silver.svg"
+    },
+    {
+      "name": "Starlight",
+      "hex": "#efe3cf",
+      "image": "images/macbook-air-15-starlight.svg"
+    },
+    {
+      "name": "Midnight",
+      "hex": "#2e3642",
+      "image": "images/macbook-air-15-midnight.svg"
+    }
+  ],
+  "46": [
+    {
+      "name": "Space Black",
+      "hex": "#2b2b2e",
+      "image": "images/macbook-pro-16-space-black.svg"
+    },
+    {
+      "name": "Silver",
+      "hex": "#dcdee1",
+      "image": "images/macbook-pro-16-silver.svg"
+    }
+  ],
+  "48": [
+    {
+      "name": "Neutral Black",
+      "hex": "#2d2f33",
+      "image": "images/vivobook-s14-neutral-black.svg"
+    },
+    {
+      "name": "Cool Silver",
+      "hex": "#cfd3d8",
+      "image": "images/vivobook-s14-cool-silver.svg"
+    }
+  ],
+  "49": [
+    {
+      "name": "Cosmic Blue",
+      "hex": "#334a73",
+      "image": "images/yoga-slim-7x-cosmic-blue.svg"
+    },
+    {
+      "name": "Luna Grey",
+      "hex": "#9ea3a8",
+      "image": "images/yoga-slim-7x-luna-grey.svg"
+    }
+  ],
+  "51": [
+    {
+      "name": "Gray",
+      "hex": "#4b5058",
+      "image": "images/galaxy-book5-pro-gray.svg"
+    },
+    {
+      "name": "Silver",
+      "hex": "#d7dade",
+      "image": "images/galaxy-book5-pro-silver.svg"
+    }
+  ],
+  "61": [
+    {
+      "name": "Cosmic Orange",
+      "hex": "#e8742e",
+      "image": "images/iphone-17-pro-max-cosmic-orange.svg"
+    },
+    {
+      "name": "Deep Blue",
+      "hex": "#2d3f5c",
+      "image": "images/iphone-17-pro-max-deep-blue.svg"
+    },
+    {
+      "name": "Silver",
+      "hex": "#dcdfe3",
+      "image": "images/iphone-17-pro-max-silver.svg"
+    }
+  ],
+  "62": [
+    {
+      "name": "Sky Blue",
+      "hex": "#c4dcef",
+      "image": "images/iphone-air-sky-blue.svg"
+    },
+    {
+      "name": "Light Gold",
+      "hex": "#eadbbf",
+      "image": "images/iphone-air-light-gold.svg"
+    },
+    {
+      "name": "Cloud White",
+      "hex": "#f4f4f2",
+      "image": "images/iphone-air-cloud-white.svg"
+    },
+    {
+      "name": "Space Black",
+      "hex": "#2b2b2e",
+      "image": "images/iphone-air-space-black.svg"
+    }
+  ],
+  "63": [
+    {
+      "name": "White",
+      "hex": "#f4f4f2",
+      "image": "images/iphone-16e-white.svg"
+    },
+    {
+      "name": "Black",
+      "hex": "#2b2b2e",
+      "image": "images/iphone-16e-black.svg"
+    }
+  ],
+  "64": [
+    {
+      "name": "Icyblue",
+      "hex": "#b9d2e6",
+      "image": "images/galaxy-s25-icyblue.svg"
+    },
+    {
+      "name": "Navy",
+      "hex": "#2c3a5c",
+      "image": "images/galaxy-s25-navy.svg"
+    },
+    {
+      "name": "Mint",
+      "hex": "#bfe3d0",
+      "image": "images/galaxy-s25-mint.svg"
+    },
+    {
+      "name": "Silver Shadow",
+      "hex": "#a5a8ad",
+      "image": "images/galaxy-s25-silver-shadow.svg"
+    }
+  ],
+  "65": [
+    {
+      "name": "Titanium Silver",
+      "hex": "#c9ccd1",
+      "image": "images/galaxy-s25-edge-titanium-silver.svg"
+    },
+    {
+      "name": "Titanium Jetblack",
+      "hex": "#26272b",
+      "image": "images/galaxy-s25-edge-titanium-jetblack.svg"
+    },
+    {
+      "name": "Titanium Icyblue",
+      "hex": "#b6cde0",
+      "image": "images/galaxy-s25-edge-titanium-icyblue.svg"
+    }
+  ],
+  "66": [
+    {
+      "name": "Blue Shadow",
+      "hex": "#3b4f73",
+      "image": "images/galaxy-z-fold7-blue-shadow.svg"
+    },
+    {
+      "name": "Silver Shadow",
+      "hex": "#a9adb3",
+      "image": "images/galaxy-z-fold7-silver-shadow.svg"
+    },
+    {
+      "name": "Jetblack",
+      "hex": "#222326",
+      "image": "images/galaxy-z-fold7-jetblack.svg"
+    }
+  ],
+  "67": [
+    {
+      "name": "Blue Shadow",
+      "hex": "#3b4f73",
+      "image": "images/galaxy-z-flip7-blue-shadow.svg"
+    },
+    {
+      "name": "Jetblack",
+      "hex": "#222326",
+      "image": "images/galaxy-z-flip7-jetblack.svg"
+    },
+    {
+      "name": "Coral Red",
+      "hex": "#e2614f",
+      "image": "images/galaxy-z-flip7-coral-red.svg"
+    }
+  ],
+  "68": [
+    {
+      "name": "Obsidian",
+      "hex": "#2a2a2c",
+      "image": "images/pixel-10-obsidian.svg"
+    },
+    {
+      "name": "Frost",
+      "hex": "#dbe4ec",
+      "image": "images/pixel-10-frost.svg"
+    },
+    {
+      "name": "Indigo",
+      "hex": "#4b4f8f",
+      "image": "images/pixel-10-indigo.svg"
+    },
+    {
+      "name": "Lemongrass",
+      "hex": "#dfe6a3",
+      "image": "images/pixel-10-lemongrass.svg"
+    }
+  ],
+  "69": [
+    {
+      "name": "Moonstone",
+      "hex": "#7d8a99",
+      "image": "images/pixel-10-pro-xl-moonstone.svg"
+    },
+    {
+      "name": "Jade",
+      "hex": "#b9d3c2",
+      "image": "images/pixel-10-pro-xl-jade.svg"
+    },
+    {
+      "name": "Porcelain",
+      "hex": "#ece6dc",
+      "image": "images/pixel-10-pro-xl-porcelain.svg"
+    },
+    {
+      "name": "Obsidian",
+      "hex": "#2a2a2c",
+      "image": "images/pixel-10-pro-xl-obsidian.svg"
+    }
+  ],
+  "70": [
+    {
+      "name": "Black Eclipse",
+      "hex": "#1f2024",
+      "image": "images/oneplus-13-black-eclipse.svg"
+    },
+    {
+      "name": "Arctic Dawn",
+      "hex": "#e6e4ea",
+      "image": "images/oneplus-13-arctic-dawn.svg"
+    },
+    {
+      "name": "Midnight Ocean",
+      "hex": "#22324f",
+      "image": "images/oneplus-13-midnight-ocean.svg"
+    }
+  ],
+  "71": [
+    {
+      "name": "Space Black",
+      "hex": "#2b2b2e",
+      "image": "images/ipad-pro-11-space-black.svg"
+    },
+    {
+      "name": "Silver",
+      "hex": "#dcdee1",
+      "image": "images/ipad-pro-11-silver.svg"
+    }
+  ],
+  "72": [
+    {
+      "name": "Space Gray",
+      "hex": "#6b6e74",
+      "image": "images/ipad-air-11-space-gray.svg"
+    },
+    {
+      "name": "Blue",
+      "hex": "#9fb7d6",
+      "image": "images/ipad-air-11-blue.svg"
+    },
+    {
+      "name": "Purple",
+      "hex": "#b9a7d6",
+      "image": "images/ipad-air-11-purple.svg"
+    },
+    {
+      "name": "Starlight",
+      "hex": "#ece3d3",
+      "image": "images/ipad-air-11-starlight.svg"
+    }
+  ],
+  "73": [
+    {
+      "name": "Blue",
+      "hex": "#8fb3dd",
+      "image": "images/ipad-a16-blue.svg"
+    },
+    {
+      "name": "Pink",
+      "hex": "#eeb1c0",
+      "image": "images/ipad-a16-pink.svg"
+    },
+    {
+      "name": "Yellow",
+      "hex": "#f3dc7a",
+      "image": "images/ipad-a16-yellow.svg"
+    },
+    {
+      "name": "Silver",
+      "hex": "#dcdee1",
+      "image": "images/ipad-a16-silver.svg"
+    }
+  ],
+  "74": [
+    {
+      "name": "Space Gray",
+      "hex": "#6b6e74",
+      "image": "images/ipad-mini-space-gray.svg"
+    },
+    {
+      "name": "Blue",
+      "hex": "#9fb7d6",
+      "image": "images/ipad-mini-blue.svg"
+    },
+    {
+      "name": "Purple",
+      "hex": "#b9a7d6",
+      "image": "images/ipad-mini-purple.svg"
+    },
+    {
+      "name": "Starlight",
+      "hex": "#ece3d3",
+      "image": "images/ipad-mini-starlight.svg"
+    }
+  ],
+  "75": [
+    {
+      "name": "Moonstone Gray",
+      "hex": "#5d6168",
+      "image": "images/galaxy-tab-s10-ultra-moonstone-gray.svg"
+    },
+    {
+      "name": "Platinum Silver",
+      "hex": "#d2d5d9",
+      "image": "images/galaxy-tab-s10-ultra-platinum-silver.svg"
+    }
+  ],
+  "76": [
+    {
+      "name": "Platinum",
+      "hex": "#d9d9d6",
+      "image": "images/surface-pro-11-platinum.svg"
+    },
+    {
+      "name": "Sapphire",
+      "hex": "#2f4a7a",
+      "image": "images/surface-pro-11-sapphire.svg"
+    },
+    {
+      "name": "Dune",
+      "hex": "#c8b8a2",
+      "image": "images/surface-pro-11-dune.svg"
+    },
+    {
+      "name": "Black",
+      "hex": "#2a2a2a",
+      "image": "images/surface-pro-11-black.svg"
+    }
+  ],
+  "77": [
+    {
+      "name": "Jet Black",
+      "hex": "#1c1c1e",
+      "image": "images/apple-watch-series-11-jet-black.svg"
+    },
+    {
+      "name": "Rose Gold",
+      "hex": "#e6c3b4",
+      "image": "images/apple-watch-series-11-rose-gold.svg"
+    },
+    {
+      "name": "Silver",
+      "hex": "#d8dadd",
+      "image": "images/apple-watch-series-11-silver.svg"
+    },
+    {
+      "name": "Space Gray",
+      "hex": "#5f6166",
+      "image": "images/apple-watch-series-11-space-gray.svg"
+    }
+  ],
+  "78": [
+    {
+      "name": "Natural Titanium",
+      "hex": "#c8c2b6",
+      "image": "images/apple-watch-ultra-3-natural-titanium.svg"
+    },
+    {
+      "name": "Black Titanium",
+      "hex": "#2b2a29",
+      "image": "images/apple-watch-ultra-3-black-titanium.svg"
+    }
+  ],
+  "79": [
+    {
+      "name": "Graphite",
+      "hex": "#3a3b3f",
+      "image": "images/galaxy-watch8-graphite.svg"
+    },
+    {
+      "name": "Silver",
+      "hex": "#cfd2d6",
+      "image": "images/galaxy-watch8-silver.svg"
+    }
+  ],
+  "80": [
+    {
+      "name": "Matte Black",
+      "hex": "#2a2a2c",
+      "image": "images/pixel-watch-4-matte-black.svg"
+    },
+    {
+      "name": "Polished Silver",
+      "hex": "#d6d8db",
+      "image": "images/pixel-watch-4-polished-silver.svg"
+    },
+    {
+      "name": "Champagne Gold",
+      "hex": "#e2cfa9",
+      "image": "images/pixel-watch-4-champagne-gold.svg"
+    }
+  ],
+  "81": [
+    {
+      "name": "Black",
+      "hex": "#26272b",
+      "image": "images/forerunner-970-black.svg"
+    },
+    {
+      "name": "White",
+      "hex": "#e9eaec",
+      "image": "images/forerunner-970-white.svg"
+    }
+  ],
+  "83": [
+    {
+      "name": "Midnight",
+      "hex": "#2c3442",
+      "image": "images/airpods-max-midnight.svg"
+    },
+    {
+      "name": "Starlight",
+      "hex": "#e9e1d2",
+      "image": "images/airpods-max-starlight.svg"
+    },
+    {
+      "name": "Blue",
+      "hex": "#a9c2dd",
+      "image": "images/airpods-max-blue.svg"
+    },
+    {
+      "name": "Purple",
+      "hex": "#c3b2d9",
+      "image": "images/airpods-max-purple.svg"
+    },
+    {
+      "name": "Orange",
+      "hex": "#ef9a68",
+      "image": "images/airpods-max-orange.svg"
+    }
+  ],
+  "84": [
+    {
+      "name": "Black",
+      "hex": "#26272b",
+      "image": "images/bose-qc-ultra-black.svg"
+    },
+    {
+      "name": "White Smoke",
+      "hex": "#e7e4de",
+      "image": "images/bose-qc-ultra-white-smoke.svg"
+    },
+    {
+      "name": "Lunar Blue",
+      "hex": "#3c4a63",
+      "image": "images/bose-qc-ultra-lunar-blue.svg"
+    }
+  ],
+  "85": [
+    {
+      "name": "Black",
+      "hex": "#2a2827",
+      "image": "images/wf-1000xm5-black.svg"
+    },
+    {
+      "name": "Platinum Silver",
+      "hex": "#cfcac2",
+      "image": "images/wf-1000xm5-platinum-silver.svg"
+    }
+  ],
+  "86": [
+    {
+      "name": "Black",
+      "hex": "#1f1f22",
+      "image": "images/beats-studio-pro-black.svg"
+    },
+    {
+      "name": "Navy",
+      "hex": "#26314d",
+      "image": "images/beats-studio-pro-navy.svg"
+    },
+    {
+      "name": "Sandstone",
+      "hex": "#d8c8ae",
+      "image": "images/beats-studio-pro-sandstone.svg"
+    },
+    {
+      "name": "Deep Brown",
+      "hex": "#4a3428",
+      "image": "images/beats-studio-pro-deep-brown.svg"
+    }
+  ],
+  "87": [
+    {
+      "name": "Black",
+      "hex": "#26272b",
+      "image": "images/jbl-flip-7-black.svg"
+    },
+    {
+      "name": "Blue",
+      "hex": "#2563eb",
+      "image": "images/jbl-flip-7-blue.svg"
+    },
+    {
+      "name": "Red",
+      "hex": "#dc2626",
+      "image": "images/jbl-flip-7-red.svg"
+    },
+    {
+      "name": "Teal",
+      "hex": "#0f9488",
+      "image": "images/jbl-flip-7-teal.svg"
+    }
+  ],
+  "88": [
+    {
+      "name": "White",
+      "hex": "#f8fafc",
+      "image": "images/playstation-portal-white.svg"
+    },
+    {
+      "name": "Midnight Black",
+      "hex": "#2a2b30",
+      "image": "images/playstation-portal-midnight-black.svg"
+    }
+  ],
+  "104": [
+    {
+      "name": "White",
+      "hex": "#f8fafc",
+      "image": "images/magic-mouse-white.svg"
+    },
+    {
+      "name": "Black",
+      "hex": "#27272a",
+      "image": "images/magic-mouse-black.svg"
+    }
+  ],
+  "105": [
+    {
+      "name": "Black",
+      "hex": "#26272b",
+      "image": "images/g-pro-x-superlight-2-black.svg"
+    },
+    {
+      "name": "White",
+      "hex": "#f1f5f9",
+      "image": "images/g-pro-x-superlight-2-white.svg"
+    },
+    {
+      "name": "Magenta",
+      "hex": "#db2777",
+      "image": "images/g-pro-x-superlight-2-magenta.svg"
+    }
+  ],
+  "106": [
+    {
+      "name": "Black",
+      "hex": "#1f1f22",
+      "image": "images/deathadder-v3-pro-black.svg"
+    },
+    {
+      "name": "White",
+      "hex": "#f1f5f9",
+      "image": "images/deathadder-v3-pro-white.svg"
+    }
+  ],
+  "109": [
+    {
+      "name": "Black",
+      "hex": "#1f2024",
+      "image": "images/xiaomi-15-ultra-black.svg"
+    },
+    {
+      "name": "White",
+      "hex": "#ecebe8",
+      "image": "images/xiaomi-15-ultra-white.svg"
+    },
+    {
+      "name": "Silver Chrome",
+      "hex": "#bfc3c8",
+      "image": "images/xiaomi-15-ultra-silver-chrome.svg"
+    }
+  ],
+  "110": [
+    {
+      "name": "Black",
+      "hex": "#1f2024",
+      "image": "images/xiaomi-15-black.svg"
+    },
+    {
+      "name": "White",
+      "hex": "#ecebe8",
+      "image": "images/xiaomi-15-white.svg"
+    },
+    {
+      "name": "Green",
+      "hex": "#9fbfa6",
+      "image": "images/xiaomi-15-green.svg"
+    }
+  ],
+  "111": [
+    {
+      "name": "Midnight Black",
+      "hex": "#1f2024",
+      "image": "images/redmi-note-14-pro-plus-midnight-black.svg"
+    },
+    {
+      "name": "Frost Blue",
+      "hex": "#a9c4de",
+      "image": "images/redmi-note-14-pro-plus-frost-blue.svg"
+    },
+    {
+      "name": "Lavender Purple",
+      "hex": "#b8a6d9",
+      "image": "images/redmi-note-14-pro-plus-lavender-purple.svg"
+    }
+  ],
+  "112": [
+    {
+      "name": "Graphite Gray",
+      "hex": "#4a4d52",
+      "image": "images/xiaomi-pad-7-graphite-gray.svg"
+    },
+    {
+      "name": "Sage Green",
+      "hex": "#a9bfae",
+      "image": "images/xiaomi-pad-7-sage-green.svg"
+    },
+    {
+      "name": "Blue",
+      "hex": "#93acd1",
+      "image": "images/xiaomi-pad-7-blue.svg"
+    }
+  ],
+  "113": [
+    {
+      "name": "Midnight Black",
+      "hex": "#1f2024",
+      "image": "images/xiaomi-smart-band-9-midnight-black.svg"
+    },
+    {
+      "name": "Glacier Silver",
+      "hex": "#cdd1d6",
+      "image": "images/xiaomi-smart-band-9-glacier-silver.svg"
+    }
+  ],
+  "114": [
+    {
+      "name": "Black",
+      "hex": "#26272b",
+      "image": "images/redmi-buds-6-pro-black.svg"
+    },
+    {
+      "name": "White",
+      "hex": "#f1f5f9",
+      "image": "images/redmi-buds-6-pro-white.svg"
+    }
+  ],
+  "115": [
+    {
+      "name": "Black",
+      "hex": "#26272b",
+      "image": "images/xiaomi-watch-s4-black.svg"
+    },
+    {
+      "name": "Silver",
+      "hex": "#cfd2d6",
+      "image": "images/xiaomi-watch-s4-silver.svg"
+    }
+  ],
+  "116": [
+    {
+      "name": "Cosmos Black",
+      "hex": "#1f2024",
+      "image": "images/vivo-x200-pro-cosmos-black.svg"
+    },
+    {
+      "name": "Titanium Grey",
+      "hex": "#8c8f93",
+      "image": "images/vivo-x200-pro-titanium-grey.svg"
+    }
+  ],
+  "117": [
+    {
+      "name": "Titanium Grey",
+      "hex": "#6b6e73",
+      "image": "images/vivo-x-fold5-titanium-grey.svg"
+    },
+    {
+      "name": "Feather White",
+      "hex": "#ecebe8",
+      "image": "images/vivo-x-fold5-feather-white.svg"
+    }
+  ],
+  "118": [
+    {
+      "name": "Titanium Grey",
+      "hex": "#6b6e73",
+      "image": "images/vivo-v50-titanium-grey.svg"
+    },
+    {
+      "name": "Rose Red",
+      "hex": "#d8737f",
+      "image": "images/vivo-v50-rose-red.svg"
+    },
+    {
+      "name": "Starry Blue",
+      "hex": "#3b5b9a",
+      "image": "images/vivo-v50-starry-blue.svg"
+    }
+  ],
+  "119": [
+    {
+      "name": "Amber Yellow",
+      "hex": "#e9c46a",
+      "image": "images/vivo-x200-fe-amber-yellow.svg"
+    },
+    {
+      "name": "Frost Blue",
+      "hex": "#a9c4de",
+      "image": "images/vivo-x200-fe-frost-blue.svg"
+    },
+    {
+      "name": "Luxe Grey",
+      "hex": "#5c5f64",
+      "image": "images/vivo-x200-fe-luxe-grey.svg"
+    }
+  ],
+  "120": [
+    {
+      "name": "Eclipse Black",
+      "hex": "#26272b",
+      "image": "images/legion-go-2-eclipse-black.svg"
+    },
+    {
+      "name": "Glacier White",
+      "hex": "#e9eaec",
+      "image": "images/legion-go-2-glacier-white.svg"
+    }
+  ],
+  "122": [
+    {
+      "name": "Cloud Grey",
+      "hex": "#a7abb1",
+      "image": "images/ideapad-slim-5-cloud-grey.svg"
+    },
+    {
+      "name": "Abyss Blue",
+      "hex": "#2e3d5c",
+      "image": "images/ideapad-slim-5-abyss-blue.svg"
+    }
+  ],
+  "124": [
+    {
+      "name": "Storm Grey",
+      "hex": "#5d6168",
+      "image": "images/lenovo-tab-p12-storm-grey.svg"
+    }
   ]
 }

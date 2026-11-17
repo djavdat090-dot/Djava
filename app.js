@@ -5,6 +5,8 @@ const ICONS = {
   Monitors: '<svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/></svg>',
   Components: '<svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>',
   Phones: '<svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>',
+  Tablets: '<svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M11 18h2"/></svg>',
+  Wearables: '<svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 6V2h6v4M9 18v4h6v-4"/></svg>',
   Audio: '<svg viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="7" rx="1.5"/><rect x="17" y="14" width="4" height="7" rx="1.5"/></svg>',
   Gaming: '<svg viewBox="0 0 24 24"><path d="M6 8h12a4 4 0 0 1 4 4v3a3 3 0 0 1-5.4 1.8L15 15H9l-1.6 1.8A3 3 0 0 1 2 15v-3a4 4 0 0 1 4-4z"/><path d="M7 11v3M5.5 12.5h3"/></svg>',
   Accessories: '<svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="11" rx="2"/><path d="M6 11h1M9 11h1M12 11h1M15 11h1M18 11h0M7 14h10"/></svg>',
@@ -37,12 +39,12 @@ const PRODUCTS = (window.PRODUCTS || []).map(p => ({
 }));
 
 const CATEGORIES = ['All', ...Object.keys(ICONS)];
-const FEATURED_BRANDS = ['Apple', 'ASUS', 'Samsung', 'Sony', 'Microsoft', 'Nintendo', 'Valve', 'Dell', 'Lenovo', 'HP', 'Google', 'NVIDIA', 'AMD', 'Logitech']
+const FEATURED_BRANDS = ['Apple', 'Samsung', 'Xiaomi', 'vivo', 'Lenovo', 'ASUS', 'Sony', 'Microsoft', 'Nintendo', 'Valve', 'Google', 'Dell', 'HP', 'NVIDIA', 'AMD', 'Logitech']
   .filter(b => PRODUCTS.some(p => p.brand === b));
 // Product photo if one is set, otherwise a picture for the category
 const CATEGORY_IMAGES = {
   Laptops: 'images/laptop.svg', Desktops: 'images/desktop.svg', Monitors: 'images/monitor.svg', Components: 'images/component.svg',
-  Phones: 'images/phone.svg', Audio: 'images/audio.svg', Gaming: 'images/gaming.svg', Accessories: 'images/accessory.svg',
+  Phones: 'images/phone.svg', Tablets: 'images/tablet.svg', Wearables: 'images/wearable.svg', Audio: 'images/audio.svg', Gaming: 'images/gaming.svg', Accessories: 'images/accessory.svg',
 };
 // Picture for a product in a given colour (falls back to the product photo, then the category picture)
 const imageFor = (p, ci = 0) => p.colors[ci]?.image || p.image || CATEGORY_IMAGES[p.category];
@@ -100,7 +102,8 @@ const stars = r => '★'.repeat(Math.round(r)) + '☆'.repeat(5 - Math.round(r))
 const $ = s => document.querySelector(s);
 
 // ---------- State ----------
-const state = { category: 'All', brand: 'All brands', query: '', sort: 'featured' };
+const PAGE = 24; // products shown before "Show more"
+const state = { category: 'All', brand: 'All brands', query: '', sort: 'featured', limit: PAGE };
 let cart = load();
 
 function load() {
@@ -141,9 +144,13 @@ function filtered() {
   return list;
 }
 
-function renderProducts() {
-  const list = filtered();
-  $('#resultCount').textContent = `${list.length} product${list.length === 1 ? '' : 's'}`;
+function renderProducts(keepLimit) {
+  if (!keepLimit) state.limit = PAGE;
+  const all = filtered();
+  const list = all.slice(0, state.limit);
+  $('#resultCount').textContent = `${all.length} product${all.length === 1 ? '' : 's'}`;
+  const rest = all.length - list.length;
+  $('#more').innerHTML = rest > 0 ? `<button class="btn btn-ghost" data-more>Show more (${rest} more)</button>` : '';
   $('#products').innerHTML = list.length ? list.map(p => {
     const ci = cardColor[p.id] || 0;
     return `
@@ -361,7 +368,7 @@ function toast(msg) {
 document.addEventListener('click', e => {
   const sw = e.target.closest('[data-swatch]');
   if (sw) { const [id, ci] = sw.dataset.swatch.split(':'); pickCardColor(+id, +ci); return; }
-  const el = e.target.closest('[data-brand],[data-cat],[data-add],[data-view],[data-inc],[data-dec],[data-remove],[data-checkout],[data-back],[data-closecart],[data-jump]');
+  const el = e.target.closest('[data-more],[data-brand],[data-cat],[data-add],[data-view],[data-inc],[data-dec],[data-remove],[data-checkout],[data-back],[data-closecart],[data-jump]');
   if (!el) return;
   const d = el.dataset;
   if (d.brand) {
@@ -376,6 +383,7 @@ document.addEventListener('click', e => {
   else if (d.inc) { cart[d.inc] = Math.min(10, cart[d.inc] + 1); save(); renderCart(); }
   else if (d.dec) { cart[d.dec]--; if (cart[d.dec] <= 0) delete cart[d.dec]; save(); renderCart(); }
   else if (d.remove) { delete cart[d.remove]; save(); renderCart(); }
+  else if ('more' in d) { state.limit += PAGE; renderProducts(true); }
   else if ('checkout' in d) renderCheckout();
   else if ('back' in d) renderCart();
   else if ('closecart' in d) closeCart();
