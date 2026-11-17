@@ -1,10 +1,12 @@
 # Djava Tech
 
-A static storefront for computers and electronics from brands like Apple, ASUS, Samsung, Dell, Lenovo, HP, Microsoft, Google, Sony, NVIDIA, AMD and Logitech.
+A static storefront for computers, phones, consoles and electronics from brands like Apple, ASUS, Samsung, Sony, Microsoft, Nintendo, Valve, Dell, Lenovo, HP, Google, NVIDIA, AMD and Logitech.
 
 ## Features
 - Product catalog with brand and category filters, live search, and sorting
 - "Shop by brand" section
+- Color options: customers pick a color on the card or product page and the picture changes
+- Gaming: PlayStation, Xbox, Nintendo Switch, Steam Deck, ROG Xbox Ally and controllers
 - Product detail modal with specs and quantity picker
 - Cart drawer saved in the browser (localStorage), with shipping and tax totals
 - Product illustrations for every item (`images/`, drawn by `tools/make_product_images.py`)

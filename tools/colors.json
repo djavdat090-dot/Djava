@@ -1,0 +1,304 @@
+{
+  "1": [
+    {
+      "name": "Sky Blue",
+      "hex": "#a9c6df",
+      "image": "images/macbook-air-sky-blue.svg"
+    },
+    {
+      "name": "Silver",
+      "hex": "#dfe1e4",
+      "image": "images/macbook-air-silver.svg"
+    },
+    {
+      "name": "Starlight",
+      "hex": "#efe3cf",
+      "image": "images/macbook-air-starlight.svg"
+    },
+    {
+      "name": "Midnight",
+      "hex": "#2e3642",
+      "image": "images/macbook-air-midnight.svg"
+    }
+  ],
+  "2": [
+    {
+      "name": "Space Black",
+      "hex": "#2b2b2e",
+      "image": "images/macbook-pro-14-space-black.svg"
+    },
+    {
+      "name": "Silver",
+      "hex": "#dcdee1",
+      "image": "images/macbook-pro-14-silver.svg"
+    }
+  ],
+  "4": [
+    {
+      "name": "Ponder Blue",
+      "hex": "#334866",
+      "image": "images/zenbook-14-oled-ponder-blue.svg"
+    },
+    {
+      "name": "Jade Black",
+      "hex": "#2a2d31",
+      "image": "images/zenbook-14-oled-jade-black.svg"
+    }
+  ],
+  "9": [
+    {
+      "name": "Platinum",
+      "hex": "#d9d9d6",
+      "image": "images/surface-laptop-platinum.svg"
+    },
+    {
+      "name": "Sapphire",
+      "hex": "#2f4a7a",
+      "image": "images/surface-laptop-sapphire.svg"
+    },
+    {
+      "name": "Dune",
+      "hex": "#c8b8a2",
+      "image": "images/surface-laptop-dune.svg"
+    },
+    {
+      "name": "Black",
+      "hex": "#2a2a2a",
+      "image": "images/surface-laptop-black.svg"
+    }
+  ],
+  "10": [
+    {
+      "name": "Blue",
+      "hex": "#5b8fd6",
+      "image": "images/imac-24-blue.svg"
+    },
+    {
+      "name": "Green",
+      "hex": "#6fbf8f",
+      "image": "images/imac-24-green.svg"
+    },
+    {
+      "name": "Pink",
+      "hex": "#ef8fa6",
+      "image": "images/imac-24-pink.svg"
+    },
+    {
+      "name": "Silver",
+      "hex": "#d6d9dd",
+      "image": "images/imac-24-silver.svg"
+    },
+    {
+      "name": "Yellow",
+      "hex": "#f2c94c",
+      "image": "images/imac-24-yellow.svg"
+    },
+    {
+      "name": "Orange",
+      "hex": "#f08a4b",
+      "image": "images/imac-24-orange.svg"
+    },
+    {
+      "name": "Purple",
+      "hex": "#9b7fd1",
+      "image": "images/imac-24-purple.svg"
+    }
+  ],
+  "18": [
+    {
+      "name": "Cosmic Orange",
+      "hex": "#e8742e",
+      "image": "images/iphone-17-pro-cosmic-orange.svg"
+    },
+    {
+      "name": "Deep Blue",
+      "hex": "#2d3f5c",
+      "image": "images/iphone-17-pro-deep-blue.svg"
+    },
+    {
+      "name": "Silver",
+      "hex": "#dcdfe3",
+      "image": "images/iphone-17-pro-silver.svg"
+    }
+  ],
+  "19": [
+    {
+      "name": "Lavender",
+      "hex": "#b9a7e0",
+      "image": "images/iphone-17-lavender.svg"
+    },
+    {
+      "name": "Sage",
+      "hex": "#a7bfa0",
+      "image": "images/iphone-17-sage.svg"
+    },
+    {
+      "name": "Mist Blue",
+      "hex": "#9fbad6",
+      "image": "images/iphone-17-mist-blue.svg"
+    },
+    {
+      "name": "White",
+      "hex": "#f4f4f2",
+      "image": "images/iphone-17-white.svg"
+    },
+    {
+      "name": "Black",
+      "hex": "#2b2b2e",
+      "image": "images/iphone-17-black.svg"
+    }
+  ],
+  "20": [
+    {
+      "name": "Titanium Silverblue",
+      "hex": "#8fa3b8",
+      "image": "images/galaxy-s25-ultra-titanium-silverblue.svg"
+    },
+    {
+      "name": "Titanium Black",
+      "hex": "#2e3033",
+      "image": "images/galaxy-s25-ultra-titanium-black.svg"
+    },
+    {
+      "name": "Titanium Gray",
+      "hex": "#8a8b8d",
+      "image": "images/galaxy-s25-ultra-titanium-gray.svg"
+    },
+    {
+      "name": "Titanium Whitesilver",
+      "hex": "#e3e3e1",
+      "image": "images/galaxy-s25-ultra-titanium-whitesilver.svg"
+    }
+  ],
+  "21": [
+    {
+      "name": "Moonstone",
+      "hex": "#7d8a99",
+      "image": "images/pixel-10-pro-moonstone.svg"
+    },
+    {
+      "name": "Jade",
+      "hex": "#b9d3c2",
+      "image": "images/pixel-10-pro-jade.svg"
+    },
+    {
+      "name": "Porcelain",
+      "hex": "#ece6dc",
+      "image": "images/pixel-10-pro-porcelain.svg"
+    },
+    {
+      "name": "Obsidian",
+      "hex": "#2a2a2c",
+      "image": "images/pixel-10-pro-obsidian.svg"
+    }
+  ],
+  "28": [
+    {
+      "name": "Black",
+      "hex": "#2a2827",
+      "image": "images/wh-1000xm6-black.svg"
+    },
+    {
+      "name": "Platinum Silver",
+      "hex": "#cfcac2",
+      "image": "images/wh-1000xm6-platinum-silver.svg"
+    },
+    {
+      "name": "Midnight Blue",
+      "hex": "#2c3a55",
+      "image": "images/wh-1000xm6-midnight-blue.svg"
+    }
+  ],
+  "29": [
+    {
+      "name": "Silver",
+      "hex": "#a7adb5",
+      "image": "images/galaxy-buds3-pro-silver.svg"
+    },
+    {
+      "name": "White",
+      "hex": "#f3f4f6",
+      "image": "images/galaxy-buds3-pro-white.svg"
+    }
+  ],
+  "30": [
+    {
+      "name": "Graphite",
+      "hex": "#3a3b3f",
+      "image": "images/mx-master-3s-graphite.svg"
+    },
+    {
+      "name": "Pale Gray",
+      "hex": "#cfd1d4",
+      "image": "images/mx-master-3s-pale-gray.svg"
+    }
+  ],
+  "32": [
+    {
+      "name": "White",
+      "hex": "#f8fafc",
+      "image": "images/magic-keyboard-white.svg"
+    },
+    {
+      "name": "Black",
+      "hex": "#27272a",
+      "image": "images/magic-keyboard-black.svg"
+    }
+  ],
+  "39": [
+    {
+      "name": "Neon Red/Blue",
+      "hex": "#ef4444",
+      "image": "images/switch-oled-neon-red-blue.svg"
+    },
+    {
+      "name": "White",
+      "hex": "#f8fafc",
+      "image": "images/switch-oled-white.svg"
+    }
+  ],
+  "43": [
+    {
+      "name": "White",
+      "hex": "#f8fafc",
+      "image": "images/dualsense-white.svg"
+    },
+    {
+      "name": "Midnight Black",
+      "hex": "#2a2b30",
+      "image": "images/dualsense-midnight-black.svg"
+    },
+    {
+      "name": "Cosmic Red",
+      "hex": "#b91c1c",
+      "image": "images/dualsense-cosmic-red.svg"
+    },
+    {
+      "name": "Starlight Blue",
+      "hex": "#6d9dd6",
+      "image": "images/dualsense-starlight-blue.svg"
+    }
+  ],
+  "44": [
+    {
+      "name": "Carbon Black",
+      "hex": "#1f2937",
+      "image": "images/xbox-controller-carbon-black.svg"
+    },
+    {
+      "name": "Robot White",
+      "hex": "#f1f5f9",
+      "image": "images/xbox-controller-robot-white.svg"
+    },
+    {
+      "name": "Shock Blue",
+      "hex": "#2563eb",
+      "image": "images/xbox-controller-shock-blue.svg"
+    },
+    {
+      "name": "Pulse Red",
+      "hex": "#dc2626",
+      "image": "images/xbox-controller-pulse-red.svg"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ const ICONS = {
   Components: '<svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>',
   Phones: '<svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>',
   Audio: '<svg viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="7" rx="1.5"/><rect x="17" y="14" width="4" height="7" rx="1.5"/></svg>',
+  Gaming: '<svg viewBox="0 0 24 24"><path d="M6 8h12a4 4 0 0 1 4 4v3a3 3 0 0 1-5.4 1.8L15 15H9l-1.6 1.8A3 3 0 0 1 2 15v-3a4 4 0 0 1 4-4z"/><path d="M7 11v3M5.5 12.5h3"/></svg>',
   Accessories: '<svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="11" rx="2"/><path d="M6 11h1M9 11h1M12 11h1M15 11h1M18 11h0M7 14h10"/></svg>',
 };
 
@@ -27,17 +28,37 @@ const PRODUCTS = (window.PRODUCTS || []).map(p => ({
   brand: esc(p.brand), name: esc(p.name), image: p.image ? esc(p.image) : '',
   category: ICONS[p.category] ? p.category : 'Accessories',
   specs: (p.specs || []).map(esc),
+  // optional colour options: [{ name, hex, image }]
+  colors: (Array.isArray(p.colors) ? p.colors : []).filter(c => c && c.name).map(c => ({
+    name: esc(c.name),
+    hex: /^#[0-9a-f]{3,8}$/i.test(c.hex) ? c.hex : '#cbd5e1',
+    image: c.image ? esc(c.image) : '',
+  })),
 }));
 
 const CATEGORIES = ['All', ...Object.keys(ICONS)];
-const FEATURED_BRANDS = ['Apple', 'ASUS', 'Samsung', 'Dell', 'Lenovo', 'HP', 'Microsoft', 'Google', 'Sony', 'NVIDIA', 'AMD', 'Logitech']
+const FEATURED_BRANDS = ['Apple', 'ASUS', 'Samsung', 'Sony', 'Microsoft', 'Nintendo', 'Valve', 'Dell', 'Lenovo', 'HP', 'Google', 'NVIDIA', 'AMD', 'Logitech']
   .filter(b => PRODUCTS.some(p => p.brand === b));
-// Product photo if one is set, otherwise the category icon
+// Product photo if one is set, otherwise a picture for the category
 const CATEGORY_IMAGES = {
   Laptops: 'images/laptop.svg', Desktops: 'images/desktop.svg', Monitors: 'images/monitor.svg', Components: 'images/component.svg',
-  Phones: 'images/phone.svg', Audio: 'images/audio.svg', Accessories: 'images/accessory.svg',
+  Phones: 'images/phone.svg', Audio: 'images/audio.svg', Gaming: 'images/gaming.svg', Accessories: 'images/accessory.svg',
 };
-const media = p => `<img src="${p.image || CATEGORY_IMAGES[p.category]}" alt="${p.brand} ${p.name}" loading="lazy" onerror="this.onerror=null;this.src='${CATEGORY_IMAGES[p.category]}'">`;
+// Picture for a product in a given colour (falls back to the product photo, then the category picture)
+const imageFor = (p, ci = 0) => p.colors[ci]?.image || p.image || CATEGORY_IMAGES[p.category];
+const media = (p, ci = 0) => `<img src="${imageFor(p, ci)}" alt="${p.brand} ${p.name}" loading="lazy" onerror="this.onerror=null;this.src='${CATEGORY_IMAGES[p.category]}'">`;
+const swatches = (p, ci, attr) => p.colors.map((c, i) =>
+  `<button type="button" class="swatch${i === ci ? ' on' : ''}" style="--c:${c.hex}" ${attr}="${p.id}:${i}" title="${c.name}" aria-label="${c.name}" aria-pressed="${i === ci}"></button>`).join('');
+
+// Cart lines are keyed "id" or "id:colourIndex"
+const keyFor = (p, ci) => (p.colors.length ? `${p.id}:${ci}` : `${p.id}`);
+function lineOf(key) {
+  const [id, ci = '0'] = String(key).split(':');
+  const p = PRODUCTS.find(x => x.id == id);
+  if (!p || (p.colors.length && !p.colors[+ci])) return null;
+  return { p, ci: +ci, color: p.colors[+ci] };
+}
+const cardColor = {}; // colour picked on each product card
 
 // ---------- Shipping ----------
 // Edit prices, delivery times and zones here. Countries not listed in a zone use "Rest of world".
@@ -86,7 +107,7 @@ function load() {
   try {
     const saved = JSON.parse(localStorage.getItem('djava-cart')) || {};
     // drop products that were removed from the catalog
-    return Object.fromEntries(Object.entries(saved).filter(([id, q]) => PRODUCTS.some(p => p.id == id) && q > 0));
+    return Object.fromEntries(Object.entries(saved).filter(([key, q]) => lineOf(key) && q > 0));
   } catch { return {}; }
 }
 function save() {
@@ -110,7 +131,7 @@ function filtered() {
   let list = PRODUCTS.filter(p =>
     (state.category === 'All' || p.category === state.category) &&
     (state.brand === 'All brands' || p.brand === state.brand) &&
-    (!q || (p.brand + ' ' + p.name + ' ' + p.category + ' ' + p.specs.join(' ')).toLowerCase().includes(q)));
+    (!q || [p.brand, p.name, p.category, ...p.specs, ...p.colors.map(c => c.name)].join(' ').toLowerCase().includes(q)));
   const sorters = {
     'price-asc': (a, b) => a.price - b.price,
     'price-desc': (a, b) => b.price - a.price,
@@ -123,37 +144,58 @@ function filtered() {
 function renderProducts() {
   const list = filtered();
   $('#resultCount').textContent = `${list.length} product${list.length === 1 ? '' : 's'}`;
-  $('#products').innerHTML = list.length ? list.map(p => `
-    <article class="card">
+  $('#products').innerHTML = list.length ? list.map(p => {
+    const ci = cardColor[p.id] || 0;
+    return `
+    <article class="card" data-card="${p.id}">
       <button class="card-media" style="background:var(--photo-bg)" data-view="${p.id}" aria-label="View ${p.brand} ${p.name}">
         <span class="brand-tag">${p.brand}</span>
         ${p.was ? `<span class="badge">-${Math.round((1 - p.price / p.was) * 100)}%</span>` : ''}
-        ${media(p)}
+        ${media(p, ci)}
       </button>
       <div class="card-body">
         <span class="card-cat">${p.brand} · ${p.category}</span>
         <h3 class="card-title">${p.brand} ${p.name}</h3>
         <div class="rating">${stars(p.rating)} <span>${p.rating} (${p.reviews})</span></div>
+        ${p.colors.length ? `<div class="swatch-row"><div class="swatches">${swatches(p, ci, 'data-swatch')}</div><span class="swatch-name">${p.colors[ci].name}</span></div>` : ''}
         <div class="price"><strong>${money(p.price)}</strong>${p.was ? `<s>${money(p.was)}</s>` : ''}</div>
         <button class="btn btn-primary" data-add="${p.id}">Add to cart</button>
       </div>
-    </article>`).join('')
+    </article>`;
+  }).join('')
     : `<p class="empty">No products match your filters. Try another search, brand or category.</p>`;
+}
+
+// Change the colour shown on a product card without redrawing the grid
+function pickCardColor(id, ci) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p?.colors[ci]) return;
+  cardColor[id] = ci;
+  const card = document.querySelector(`[data-card="${id}"]`);
+  if (!card) return;
+  card.querySelector('.card-media img').src = imageFor(p, ci);
+  card.querySelectorAll('.swatch').forEach((s, i) => { s.classList.toggle('on', i === ci); s.setAttribute('aria-pressed', i === ci); });
+  card.querySelector('.swatch-name').innerHTML = p.colors[ci].name;
 }
 
 function openProduct(id) {
   const p = PRODUCTS.find(x => x.id === id);
   let qty = 1;
+  let ci = cardColor[id] || 0;
   const modal = $('#productModal');
   modal.innerHTML = `
     <div class="modal-grid">
-      <div class="modal-media" style="background:var(--photo-bg)">${media(p)}</div>
+      <div class="modal-media" style="background:var(--photo-bg)">${media(p, ci)}</div>
       <div class="modal-body">
         <button class="icon-btn" data-close aria-label="Close">✕</button>
         <span class="card-cat">${p.brand} · ${p.category}</span>
         <h3>${p.brand} ${p.name}</h3>
         <div class="rating">${stars(p.rating)} <span>${p.rating} · ${p.reviews} reviews</span></div>
         <div class="price"><strong>${money(p.price)}</strong>${p.was ? `<s>${money(p.was)}</s>` : ''}</div>
+        ${p.colors.length ? `<div class="color-pick">
+          <div class="color-label">Color: <b id="mcolor">${p.colors[ci].name}</b></div>
+          <div class="swatches big">${swatches(p, ci, 'data-mcolor')}</div>
+        </div>` : ''}
         <ul class="specs">${p.specs.map(s => `<li>${s}</li>`).join('')}</ul>
         <div class="qty"><button data-q="-1" aria-label="Decrease">−</button><span id="mq">1</span><button data-q="1" aria-label="Increase">+</button></div>
         <button class="btn btn-primary btn-block" data-madd>Add to cart</button>
@@ -163,22 +205,31 @@ function openProduct(id) {
     if (e.target === modal || e.target.closest('[data-close]')) modal.close();
     const q = e.target.closest('[data-q]');
     if (q) { qty = Math.max(1, Math.min(10, qty + +q.dataset.q)); $('#mq').textContent = qty; }
-    if (e.target.closest('[data-madd]')) { addToCart(p.id, qty); modal.close(); }
+    const sw = e.target.closest('[data-mcolor]');
+    if (sw) {
+      ci = +sw.dataset.mcolor.split(':')[1];
+      modal.querySelector('.modal-media img').src = imageFor(p, ci);
+      modal.querySelectorAll('.swatch').forEach((s, i) => { s.classList.toggle('on', i === ci); s.setAttribute('aria-pressed', i === ci); });
+      $('#mcolor').innerHTML = p.colors[ci].name;
+      pickCardColor(p.id, ci);
+    }
+    if (e.target.closest('[data-madd]')) { addToCart(p.id, qty, ci); modal.close(); }
   };
   modal.showModal();
 }
 
 // ---------- Cart ----------
-function addToCart(id, qty = 1) {
-  cart[id] = Math.min(10, (cart[id] || 0) + qty);
-  save(); renderCart();
+function addToCart(id, qty = 1, ci = 0) {
   const p = PRODUCTS.find(x => x.id === id);
-  toast(`Added ${p.brand} ${p.name} to cart`);
+  const key = keyFor(p, ci);
+  cart[key] = Math.min(10, (cart[key] || 0) + qty);
+  save(); renderCart();
+  toast(`Added ${p.brand} ${p.name}${p.colors[ci] ? ` (${p.colors[ci].name})` : ''} to cart`);
   const c = $('#cartCount'); c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump');
 }
 
 function totals() {
-  const subtotal = Object.entries(cart).reduce((s, [id, q]) => s + PRODUCTS.find(p => p.id == id).price * q, 0);
+  const subtotal = Object.entries(cart).reduce((s, [key, q]) => s + lineOf(key).p.price * q, 0);
   const zone = zoneFor(country);
   const shipping = subtotal === 0 || (zone.freeOver != null && subtotal >= zone.freeOver) ? 0 : zone.price;
   const tax = subtotal * (zone.tax || 0);
@@ -207,11 +258,12 @@ function renderCart() {
     return;
   }
   $('#cartItems').innerHTML = entries.map(([id, q]) => {
-    const p = PRODUCTS.find(x => x.id == id);
+    const { p, ci, color } = lineOf(id);
     return `<div class="line">
-      <div class="line-thumb" style="background:var(--photo-bg)">${media(p)}</div>
+      <div class="line-thumb" style="background:var(--photo-bg)">${media(p, ci)}</div>
       <div>
         <div class="line-title">${p.brand} ${p.name}</div>
+        ${color ? `<div class="line-color"><span class="dot" style="--c:${color.hex}"></span>${color.name}</div>` : ''}
         <div class="line-meta">
           <div class="qty"><button data-dec="${id}" aria-label="Decrease">−</button><span>${q}</span><button data-inc="${id}" aria-label="Increase">+</button></div>
           <button class="line-remove" data-remove="${id}">Remove</button>
@@ -306,6 +358,8 @@ function toast(msg) {
 
 // ---------- Events ----------
 document.addEventListener('click', e => {
+  const sw = e.target.closest('[data-swatch]');
+  if (sw) { const [id, ci] = sw.dataset.swatch.split(':'); pickCardColor(+id, +ci); return; }
   const el = e.target.closest('[data-brand],[data-cat],[data-add],[data-view],[data-inc],[data-dec],[data-remove],[data-checkout],[data-back],[data-closecart],[data-jump]');
   if (!el) return;
   const d = el.dataset;
@@ -316,7 +370,7 @@ document.addEventListener('click', e => {
   }
   else if (d.cat) { state.category = d.cat; renderCategories(); renderProducts(); }
   else if (d.jump) { state.category = d.jump; renderCategories(); renderProducts(); }
-  else if (d.add) addToCart(+d.add);
+  else if (d.add) addToCart(+d.add, 1, cardColor[+d.add] || 0);
   else if (d.view) openProduct(+d.view);
   else if (d.inc) { cart[d.inc] = Math.min(10, cart[d.inc] + 1); save(); renderCart(); }
   else if (d.dec) { cart[d.dec]--; if (cart[d.dec] <= 0) delete cart[d.dec]; save(); renderCart(); }

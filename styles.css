@@ -324,3 +324,30 @@ button, a, .chip { -webkit-tap-highlight-color: transparent; touch-action: manip
 .summary-details summary small { color: var(--muted); font-weight: 500; font-size: .8rem; text-decoration: underline; }
 .summary-details[open] summary { display: none; }
 .summary-body { display: flex; flex-direction: column; gap: 10px; }
+
+/* ---------- Colours ---------- */
+.brand-strip { grid-template-columns: repeat(7, 1fr); }
+@media (max-width: 860px) { .brand-strip { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 560px) { .brand-strip { grid-template-columns: repeat(3, 1fr); } }
+.swatch-row { display: flex; align-items: center; gap: 8px; min-height: 26px; flex-wrap: wrap; }
+.swatches { display: flex; gap: 6px; flex-wrap: wrap; }
+.swatch {
+  width: 20px; height: 20px; border-radius: 50%; padding: 0; background: var(--c);
+  border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--border), inset 0 0 0 1px rgba(0, 0, 0, .12);
+  transition: box-shadow .15s, transform .15s;
+}
+.swatch:hover { transform: scale(1.12); }
+.swatch.on { box-shadow: 0 0 0 2px var(--primary); }
+.swatches.big .swatch { width: 30px; height: 30px; }
+.swatch-name { color: var(--muted); font-size: .8rem; }
+.color-pick { display: flex; flex-direction: column; gap: 8px; }
+.color-label { font-size: .92rem; color: var(--muted); }
+.color-label b { color: var(--text); }
+.line-color { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: .8rem; margin-top: 2px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .2); }
+@media (pointer: coarse) {
+  .swatch { width: 26px; height: 26px; }
+  .swatches.big .swatch { width: 36px; height: 36px; }
+  .swatches { gap: 8px; }
+}
+@media (max-width: 560px) { .swatch-name { display: none; } }

@@ -15,7 +15,29 @@ window.PRODUCTS = [
       "13.6\" Liquid Retina display",
       "Up to 18 hours battery"
     ],
-    "image": "images/macbook-air.svg"
+    "image": "images/macbook-air-sky-blue.svg",
+    "colors": [
+      {
+        "name": "Sky Blue",
+        "hex": "#a9c6df",
+        "image": "images/macbook-air-sky-blue.svg"
+      },
+      {
+        "name": "Silver",
+        "hex": "#dfe1e4",
+        "image": "images/macbook-air-silver.svg"
+      },
+      {
+        "name": "Starlight",
+        "hex": "#efe3cf",
+        "image": "images/macbook-air-starlight.svg"
+      },
+      {
+        "name": "Midnight",
+        "hex": "#2e3642",
+        "image": "images/macbook-air-midnight.svg"
+      }
+    ]
   },
   {
     "id": 2,
@@ -32,7 +54,19 @@ window.PRODUCTS = [
       "14.2\" Liquid Retina XDR display",
       "Thunderbolt 5 ports"
     ],
-    "image": "images/macbook-pro-14.svg"
+    "image": "images/macbook-pro-14-space-black.svg",
+    "colors": [
+      {
+        "name": "Space Black",
+        "hex": "#2b2b2e",
+        "image": "images/macbook-pro-14-space-black.svg"
+      },
+      {
+        "name": "Silver",
+        "hex": "#dcdee1",
+        "image": "images/macbook-pro-14-silver.svg"
+      }
+    ]
   },
   {
     "id": 3,
@@ -68,7 +102,19 @@ window.PRODUCTS = [
       "1.2 kg",
       "Wi-Fi 7"
     ],
-    "image": "images/zenbook-14-oled.svg"
+    "image": "images/zenbook-14-oled-ponder-blue.svg",
+    "colors": [
+      {
+        "name": "Ponder Blue",
+        "hex": "#334866",
+        "image": "images/zenbook-14-oled-ponder-blue.svg"
+      },
+      {
+        "name": "Jade Black",
+        "hex": "#2a2d31",
+        "image": "images/zenbook-14-oled-jade-black.svg"
+      }
+    ]
   },
   {
     "id": 5,
@@ -150,7 +196,29 @@ window.PRODUCTS = [
       "13.8\" PixelSense touch",
       "Copilot+ PC"
     ],
-    "image": "images/surface-laptop.svg"
+    "image": "images/surface-laptop-platinum.svg",
+    "colors": [
+      {
+        "name": "Platinum",
+        "hex": "#d9d9d6",
+        "image": "images/surface-laptop-platinum.svg"
+      },
+      {
+        "name": "Sapphire",
+        "hex": "#2f4a7a",
+        "image": "images/surface-laptop-sapphire.svg"
+      },
+      {
+        "name": "Dune",
+        "hex": "#c8b8a2",
+        "image": "images/surface-laptop-dune.svg"
+      },
+      {
+        "name": "Black",
+        "hex": "#2a2a2a",
+        "image": "images/surface-laptop-black.svg"
+      }
+    ]
   },
   {
     "id": 10,
@@ -166,7 +234,44 @@ window.PRODUCTS = [
       "16 GB memory, 256 GB SSD",
       "Magic Keyboard & Mouse included"
     ],
-    "image": "images/imac-24.svg"
+    "image": "images/imac-24-blue.svg",
+    "colors": [
+      {
+        "name": "Blue",
+        "hex": "#5b8fd6",
+        "image": "images/imac-24-blue.svg"
+      },
+      {
+        "name": "Green",
+        "hex": "#6fbf8f",
+        "image": "images/imac-24-green.svg"
+      },
+      {
+        "name": "Pink",
+        "hex": "#ef8fa6",
+        "image": "images/imac-24-pink.svg"
+      },
+      {
+        "name": "Silver",
+        "hex": "#d6d9dd",
+        "image": "images/imac-24-silver.svg"
+      },
+      {
+        "name": "Yellow",
+        "hex": "#f2c94c",
+        "image": "images/imac-24-yellow.svg"
+      },
+      {
+        "name": "Orange",
+        "hex": "#f08a4b",
+        "image": "images/imac-24-orange.svg"
+      },
+      {
+        "name": "Purple",
+        "hex": "#9b7fd1",
+        "image": "images/imac-24-purple.svg"
+      }
+    ]
   },
   {
     "id": 11,
@@ -297,7 +402,24 @@ window.PRODUCTS = [
       "48 MP Pro camera system",
       "256 GB"
     ],
-    "image": "images/iphone-17-pro.svg"
+    "image": "images/iphone-17-pro-cosmic-orange.svg",
+    "colors": [
+      {
+        "name": "Cosmic Orange",
+        "hex": "#e8742e",
+        "image": "images/iphone-17-pro-cosmic-orange.svg"
+      },
+      {
+        "name": "Deep Blue",
+        "hex": "#2d3f5c",
+        "image": "images/iphone-17-pro-deep-blue.svg"
+      },
+      {
+        "name": "Silver",
+        "hex": "#dcdfe3",
+        "image": "images/iphone-17-pro-silver.svg"
+      }
+    ]
   },
   {
     "id": 19,
@@ -313,7 +435,34 @@ window.PRODUCTS = [
       "48 MP Dual Fusion camera",
       "256 GB"
     ],
-    "image": "images/iphone-17.svg"
+    "image": "images/iphone-17-lavender.svg",
+    "colors": [
+      {
+        "name": "Lavender",
+        "hex": "#b9a7e0",
+        "image": "images/iphone-17-lavender.svg"
+      },
+      {
+        "name": "Sage",
+        "hex": "#a7bfa0",
+        "image": "images/iphone-17-sage.svg"
+      },
+      {
+        "name": "Mist Blue",
+        "hex": "#9fbad6",
+        "image": "images/iphone-17-mist-blue.svg"
+      },
+      {
+        "name": "White",
+        "hex": "#f4f4f2",
+        "image": "images/iphone-17-white.svg"
+      },
+      {
+        "name": "Black",
+        "hex": "#2b2b2e",
+        "image": "images/iphone-17-black.svg"
+      }
+    ]
   },
   {
     "id": 20,
@@ -330,7 +479,29 @@ window.PRODUCTS = [
       "200 MP camera, 5× zoom",
       "Built-in S Pen"
     ],
-    "image": "images/galaxy-s25-ultra.svg"
+    "image": "images/galaxy-s25-ultra-titanium-silverblue.svg",
+    "colors": [
+      {
+        "name": "Titanium Silverblue",
+        "hex": "#8fa3b8",
+        "image": "images/galaxy-s25-ultra-titanium-silverblue.svg"
+      },
+      {
+        "name": "Titanium Black",
+        "hex": "#2e3033",
+        "image": "images/galaxy-s25-ultra-titanium-black.svg"
+      },
+      {
+        "name": "Titanium Gray",
+        "hex": "#8a8b8d",
+        "image": "images/galaxy-s25-ultra-titanium-gray.svg"
+      },
+      {
+        "name": "Titanium Whitesilver",
+        "hex": "#e3e3e1",
+        "image": "images/galaxy-s25-ultra-titanium-whitesilver.svg"
+      }
+    ]
   },
   {
     "id": 21,
@@ -346,7 +517,29 @@ window.PRODUCTS = [
       "50 MP triple camera, 5× zoom",
       "7 years of updates"
     ],
-    "image": "images/pixel-10-pro.svg"
+    "image": "images/pixel-10-pro-moonstone.svg",
+    "colors": [
+      {
+        "name": "Moonstone",
+        "hex": "#7d8a99",
+        "image": "images/pixel-10-pro-moonstone.svg"
+      },
+      {
+        "name": "Jade",
+        "hex": "#b9d3c2",
+        "image": "images/pixel-10-pro-jade.svg"
+      },
+      {
+        "name": "Porcelain",
+        "hex": "#ece6dc",
+        "image": "images/pixel-10-pro-porcelain.svg"
+      },
+      {
+        "name": "Obsidian",
+        "hex": "#2a2a2c",
+        "image": "images/pixel-10-pro-obsidian.svg"
+      }
+    ]
   },
   {
     "id": 22,
@@ -461,7 +654,24 @@ window.PRODUCTS = [
       "Foldable design",
       "Multipoint Bluetooth"
     ],
-    "image": "images/wh-1000xm6.svg"
+    "image": "images/wh-1000xm6-black.svg",
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#2a2827",
+        "image": "images/wh-1000xm6-black.svg"
+      },
+      {
+        "name": "Platinum Silver",
+        "hex": "#cfcac2",
+        "image": "images/wh-1000xm6-platinum-silver.svg"
+      },
+      {
+        "name": "Midnight Blue",
+        "hex": "#2c3a55",
+        "image": "images/wh-1000xm6-midnight-blue.svg"
+      }
+    ]
   },
   {
     "id": 29,
@@ -478,7 +688,19 @@ window.PRODUCTS = [
       "IP57",
       "Wireless charging case"
     ],
-    "image": "images/galaxy-buds3-pro.svg"
+    "image": "images/galaxy-buds3-pro-silver.svg",
+    "colors": [
+      {
+        "name": "Silver",
+        "hex": "#a7adb5",
+        "image": "images/galaxy-buds3-pro-silver.svg"
+      },
+      {
+        "name": "White",
+        "hex": "#f3f4f6",
+        "image": "images/galaxy-buds3-pro-white.svg"
+      }
+    ]
   },
   {
     "id": 30,
@@ -494,7 +716,19 @@ window.PRODUCTS = [
       "MagSpeed scroll wheel",
       "Up to 70 days battery"
     ],
-    "image": "images/mx-master-3s.svg"
+    "image": "images/mx-master-3s-graphite.svg",
+    "colors": [
+      {
+        "name": "Graphite",
+        "hex": "#3a3b3f",
+        "image": "images/mx-master-3s-graphite.svg"
+      },
+      {
+        "name": "Pale Gray",
+        "hex": "#cfd1d4",
+        "image": "images/mx-master-3s-pale-gray.svg"
+      }
+    ]
   },
   {
     "id": 31,
@@ -526,7 +760,19 @@ window.PRODUCTS = [
       "USB-C charging",
       "Wireless"
     ],
-    "image": "images/magic-keyboard.svg"
+    "image": "images/magic-keyboard-white.svg",
+    "colors": [
+      {
+        "name": "White",
+        "hex": "#f8fafc",
+        "image": "images/magic-keyboard-white.svg"
+      },
+      {
+        "name": "Black",
+        "hex": "#27272a",
+        "image": "images/magic-keyboard-black.svg"
+      }
+    ]
   },
   {
     "id": 33,
@@ -544,5 +790,240 @@ window.PRODUCTS = [
       "Magnetic wrist rest"
     ],
     "image": "images/blackwidow-v4-pro.svg"
+  },
+  {
+    "id": 34,
+    "brand": "Sony",
+    "name": "PlayStation 5 Pro",
+    "category": "Gaming",
+    "price": 749.99,
+    "rating": 4.7,
+    "reviews": 1820,
+    "image": "images/ps5-pro.svg",
+    "specs": [
+      "2 TB SSD",
+      "Upgraded GPU with advanced ray tracing",
+      "PSSR AI upscaling",
+      "Wi-Fi 7",
+      "Disc drive sold separately"
+    ]
+  },
+  {
+    "id": 35,
+    "brand": "Sony",
+    "name": "PlayStation 5 Slim",
+    "category": "Gaming",
+    "price": 549.99,
+    "rating": 4.8,
+    "reviews": 5210,
+    "image": "images/ps5-slim.svg",
+    "specs": [
+      "1 TB SSD",
+      "Ultra HD Blu-ray disc drive",
+      "4K gaming up to 120 fps",
+      "DualSense controller included"
+    ]
+  },
+  {
+    "id": 36,
+    "brand": "Microsoft",
+    "name": "Xbox Series X 1 TB",
+    "category": "Gaming",
+    "price": 649.99,
+    "rating": 4.8,
+    "reviews": 4380,
+    "image": "images/xbox-series-x.svg",
+    "specs": [
+      "12 teraflops of power",
+      "1 TB SSD",
+      "4K gaming up to 120 fps",
+      "4K UHD Blu-ray drive"
+    ]
+  },
+  {
+    "id": 37,
+    "brand": "Microsoft",
+    "name": "Xbox Series S 512 GB",
+    "category": "Gaming",
+    "price": 399.99,
+    "rating": 4.7,
+    "reviews": 3960,
+    "image": "images/xbox-series-s.svg",
+    "specs": [
+      "All-digital console",
+      "512 GB SSD",
+      "1440p gaming up to 120 fps",
+      "Compact, quiet design"
+    ]
+  },
+  {
+    "id": 38,
+    "brand": "Nintendo",
+    "name": "Switch 2",
+    "category": "Gaming",
+    "price": 449.99,
+    "rating": 4.8,
+    "reviews": 2740,
+    "image": "images/switch-2.svg",
+    "specs": [
+      "7.9\" 1080p 120Hz screen",
+      "Up to 4K on the TV when docked",
+      "Magnetic Joy-Con 2 controllers",
+      "256 GB storage"
+    ]
+  },
+  {
+    "id": 39,
+    "brand": "Nintendo",
+    "name": "Switch – OLED Model",
+    "category": "Gaming",
+    "price": 399.99,
+    "rating": 4.8,
+    "reviews": 6120,
+    "image": "images/switch-oled-neon-red-blue.svg",
+    "specs": [
+      "7\" OLED screen",
+      "64 GB storage",
+      "Wide adjustable stand",
+      "Dock with wired LAN port"
+    ],
+    "colors": [
+      {
+        "name": "Neon Red/Blue",
+        "hex": "#ef4444",
+        "image": "images/switch-oled-neon-red-blue.svg"
+      },
+      {
+        "name": "White",
+        "hex": "#f8fafc",
+        "image": "images/switch-oled-white.svg"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "brand": "Valve",
+    "name": "Steam Deck OLED 512 GB",
+    "category": "Gaming",
+    "price": 549,
+    "rating": 4.9,
+    "reviews": 2310,
+    "image": "images/steam-deck-oled-512.svg",
+    "specs": [
+      "7.4\" HDR OLED, up to 90Hz",
+      "Custom AMD APU",
+      "512 GB NVMe SSD",
+      "3–12 hours of gameplay",
+      "Wi-Fi 6E"
+    ]
+  },
+  {
+    "id": 41,
+    "brand": "Valve",
+    "name": "Steam Deck OLED 1 TB",
+    "category": "Gaming",
+    "price": 649,
+    "rating": 4.9,
+    "reviews": 1540,
+    "image": "images/steam-deck-oled-1tb.svg",
+    "specs": [
+      "7.4\" HDR OLED, up to 90Hz",
+      "1 TB NVMe SSD",
+      "Premium anti-glare etched glass",
+      "Exclusive carrying case"
+    ]
+  },
+  {
+    "id": 42,
+    "brand": "ASUS",
+    "name": "ROG Xbox Ally X",
+    "category": "Gaming",
+    "price": 999.99,
+    "rating": 4.6,
+    "reviews": 640,
+    "image": "images/rog-xbox-ally-x.svg",
+    "specs": [
+      "7\" 1080p 120Hz screen",
+      "AMD Ryzen AI Z2 Extreme",
+      "24 GB RAM, 1 TB SSD",
+      "Xbox full-screen experience",
+      "Impulse triggers"
+    ]
+  },
+  {
+    "id": 43,
+    "brand": "Sony",
+    "name": "DualSense Wireless Controller",
+    "category": "Gaming",
+    "price": 74.99,
+    "rating": 4.8,
+    "reviews": 8890,
+    "image": "images/dualsense-white.svg",
+    "specs": [
+      "Haptic feedback",
+      "Adaptive triggers",
+      "Built-in microphone",
+      "USB-C charging"
+    ],
+    "colors": [
+      {
+        "name": "White",
+        "hex": "#f8fafc",
+        "image": "images/dualsense-white.svg"
+      },
+      {
+        "name": "Midnight Black",
+        "hex": "#2a2b30",
+        "image": "images/dualsense-midnight-black.svg"
+      },
+      {
+        "name": "Cosmic Red",
+        "hex": "#b91c1c",
+        "image": "images/dualsense-cosmic-red.svg"
+      },
+      {
+        "name": "Starlight Blue",
+        "hex": "#6d9dd6",
+        "image": "images/dualsense-starlight-blue.svg"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "brand": "Microsoft",
+    "name": "Xbox Wireless Controller",
+    "category": "Gaming",
+    "price": 64.99,
+    "rating": 4.7,
+    "reviews": 7420,
+    "image": "images/xbox-controller-carbon-black.svg",
+    "specs": [
+      "Hybrid D-pad",
+      "Textured grips",
+      "Works with Xbox, PC and phones",
+      "Bluetooth + Xbox Wireless"
+    ],
+    "colors": [
+      {
+        "name": "Carbon Black",
+        "hex": "#1f2937",
+        "image": "images/xbox-controller-carbon-black.svg"
+      },
+      {
+        "name": "Robot White",
+        "hex": "#f1f5f9",
+        "image": "images/xbox-controller-robot-white.svg"
+      },
+      {
+        "name": "Shock Blue",
+        "hex": "#2563eb",
+        "image": "images/xbox-controller-shock-blue.svg"
+      },
+      {
+        "name": "Pulse Red",
+        "hex": "#dc2626",
+        "image": "images/xbox-controller-pulse-red.svg"
+      }
+    ]
   }
 ];

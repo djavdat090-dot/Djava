@@ -344,6 +344,151 @@ def keyboard(color, keys, numpad=False, mech=False, accent=None):
     return svg(g, defs)
 
 
+
+# ---------- Colour helpers ----------
+def _mix(hex_, target, t):
+    hex_ = hex_.lstrip('#')
+    r, g, b = (int(hex_[i:i + 2], 16) for i in (0, 2, 4))
+    tr, tg, tb = target
+    return '#%02x%02x%02x' % (round(r + (tr - r) * t), round(g + (tg - g) * t), round(b + (tb - b) * t))
+
+
+def light(hex_, t=.25):
+    return _mix(hex_, (255, 255, 255), t)
+
+
+def dark(hex_, t=.3):
+    return _mix(hex_, (0, 0, 0), t)
+
+
+def pair(hex_):
+    """Gradient pair for a body colour."""
+    return (light(hex_, .18), dark(hex_, .22))
+
+
+# ---------- Gaming ----------
+def ps5(body='#f8fafc', core='#111827', pro=False):
+    defs = lin('wing', body, dark(body, .14), 1, 0) + lin('wing2', dark(body, .14), body, 1, 0)
+    g = shadow(200, 270, 110, 10)
+    g += f'<path d="M180 22 H220 V262 H180Z" fill="{core}"/>'
+    g += '<path d="M180 24 C150 30 138 52 132 84 L118 252 Q148 266 180 260Z" fill="url(#wing2)"/>'
+    g += '<path d="M220 24 C250 30 262 52 268 84 L282 252 Q252 266 220 260Z" fill="url(#wing)"/>'
+    g += '<path d="M180 26 V258 M220 26 V258" stroke="#60a5fa" stroke-width="2" opacity=".85"/>'
+    if pro:
+        for y in (110, 150, 190):
+            g += f'<path d="M140 {y} H180 M220 {y} H260" stroke="{core}" stroke-width="4"/>'
+    g += '<rect x="150" y="262" width="100" height="8" rx="4" fill="#1f2937"/>'
+    g += f'<rect x="192" y="40" width="16" height="6" rx="3" fill="#374151"/>'
+    return svg(g, defs)
+
+
+def xbox_x(body='#1f2937'):
+    defs = lin('front', light(body, .08), dark(body, .35)) + lin('side', dark(body, .25), dark(body, .5))
+    defs += '<radialGradient id="vent"><stop offset="0" stop-color="#22c55e" stop-opacity=".9"/><stop offset="1" stop-color="#14532d"/></radialGradient>'
+    g = shadow(205, 270, 110, 12)
+    g += '<path d="M128 70 L170 42 H300 L258 70Z" fill="#111"/>'
+    g += '<ellipse cx="214" cy="56" rx="48" ry="11" fill="url(#vent)"/>'
+    for i in range(9):
+        g += f'<circle cx="{178 + i * 9}" cy="56" r="2.2" fill="#052e16"/>'
+    g += '<rect x="128" y="70" width="130" height="196" fill="url(#front)"/>'
+    g += '<path d="M258 70 L300 42 V238 L258 266Z" fill="url(#side)"/>'
+    g += '<rect x="140" y="84" width="60" height="4" rx="2" fill="#000" opacity=".6"/>'
+    g += '<circle cx="243" cy="86" r="5" fill="none" stroke="#e5e7eb" stroke-width="1.5"/>'
+    g += '<rect x="140" y="250" width="16" height="6" rx="2" fill="#000" opacity=".5"/>'
+    return svg(g, defs)
+
+
+def xbox_s(body='#f1f5f9'):
+    defs = lin('front', body, dark(body, .12)) + lin('top', light(body, .3), body, 1, 1)
+    g = shadow(205, 248, 150, 12)
+    g += '<path d="M60 150 L120 110 H340 L280 150Z" fill="url(#top)"/>'
+    g += '<ellipse cx="236" cy="130" rx="52" ry="15" fill="#111827"/>'
+    for i in range(10):
+        g += f'<circle cx="{196 + i * 9}" cy="130" r="2" fill="#374151"/>'
+    g += '<rect x="60" y="150" width="220" height="86" fill="url(#front)"/>'
+    g += f'<path d="M280 150 L340 110 V196 L280 236Z" fill="{dark(body, .2)}"/>'
+    g += '<circle cx="80" cy="168" r="5" fill="none" stroke="#475569" stroke-width="1.5"/>'
+    g += '<rect x="96" y="222" width="18" height="6" rx="2" fill="#1f2937" opacity=".55"/>'
+    return svg(g, defs)
+
+
+def _stick(cx, cy, r=13, ring=None):
+    out = f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="#0b0f19"/><circle cx="{cx}" cy="{cy}" r="{r * .62}" fill="#1f2937"/>'
+    if ring:
+        out = f'<circle cx="{cx}" cy="{cy}" r="{r + 4}" fill="none" stroke="{ring}" stroke-width="3"/>' + out
+    return out
+
+
+def _abxy(cx, cy, d=12, r=5, fill='#1f2937'):
+    return ''.join(f'<circle cx="{cx + dx}" cy="{cy + dy}" r="{r}" fill="{fill}"/>' for dx, dy in ((0, -d), (d, 0), (0, d), (-d, 0)))
+
+
+def _dpad(cx, cy, s=6, fill='#1f2937'):
+    return (f'<rect x="{cx - s}" y="{cy - s * 3}" width="{s * 2}" height="{s * 6}" rx="2" fill="{fill}"/>'
+            f'<rect x="{cx - s * 3}" y="{cy - s}" width="{s * 6}" height="{s * 2}" rx="2" fill="{fill}"/>')
+
+
+def switch_oled(left='#ef4444', right='#3b82f6', wp=('#f43f5e', '#7c3aed')):
+    screen, wpdefs = wallpaper(126, 98, 148, 92, wp[0], wp[1], 3)
+    g = shadow(200, 232, 150, 10)
+    g += f'<path d="M122 92 H96 Q78 92 78 110 V180 Q78 198 96 198 H122Z" fill="{left}"/>'
+    g += f'<path d="M278 92 H304 Q322 92 322 110 V180 Q322 198 304 198 H278Z" fill="{right}"/>'
+    g += '<rect x="120" y="90" width="160" height="110" rx="6" fill="#111827"/>' + screen
+    g += _stick(100, 120, 9) + _dpad(100, 162, 4) + _stick(300, 168, 9) + _abxy(300, 124, 9, 4)
+    return svg(g, wpdefs)
+
+
+def switch2(accent_l='#38bdf8', accent_r='#f472b6'):
+    screen, wpdefs = wallpaper(118, 92, 164, 104, '#ef4444', '#f59e0b', 3)
+    g = shadow(200, 238, 165, 10)
+    g += '<path d="M112 84 H86 Q64 84 64 106 V184 Q64 206 86 206 H112Z" fill="#1f2937"/>'
+    g += '<path d="M288 84 H314 Q336 84 336 106 V184 Q336 206 314 206 H288Z" fill="#1f2937"/>'
+    g += f'<path d="M112 84 V206" stroke="{accent_l}" stroke-width="5"/><path d="M288 84 V206" stroke="{accent_r}" stroke-width="5"/>'
+    g += '<rect x="110" y="82" width="180" height="126" rx="6" fill="#0b0f19"/>' + screen
+    g += _stick(88, 116, 11) + _dpad(88, 166, 4.5, '#374151') + _stick(312, 170, 11) + _abxy(312, 118, 10, 4.5, '#374151')
+    return svg(g, wpdefs)
+
+
+def handheld(body='#1f2937', screen_c=('#6366f1', '#06b6d4'), style='deck'):
+    defs = lin('hb', light(body, .1), dark(body, .25))
+    if style == 'deck':
+        screen, wpdefs = wallpaper(124, 106, 152, 94, screen_c[0], screen_c[1], 3)
+    else:
+        screen, wpdefs = wallpaper(118, 100, 164, 104, screen_c[0], screen_c[1], 3)
+    g = shadow(200, 246, 175, 10)
+    g += '<path d="M70 92 H330 Q372 92 376 140 L380 196 Q382 236 346 236 Q318 236 300 214 H100 Q82 236 54 236 Q18 236 20 196 L24 140 Q28 92 70 92Z" fill="url(#hb)"/>'
+    g += '<rect x="112" y="96" width="176" height="114" rx="6" fill="#0b0f19"/>' + screen
+    if style == 'deck':
+        g += _stick(66, 124, 13) + _stick(334, 124, 13)
+        g += '<rect x="48" y="166" width="38" height="36" rx="6" fill="#111827"/><rect x="314" y="166" width="38" height="36" rx="6" fill="#111827"/>'
+        g += _dpad(94, 136, 4, '#0b0f19') + _abxy(304, 140, 9, 4.5, '#0b0f19')
+    else:
+        ring = '#a855f7'
+        g += _stick(70, 120, 12, ring) + _dpad(70, 180, 5, '#0b0f19') + _abxy(330, 128, 11, 5, '#0b0f19') + _stick(320, 184, 12, ring)
+    return svg(g, defs + wpdefs)
+
+
+def gamepad(body='#f8fafc', accent='#111827', style='sony'):
+    defs = lin('gp', light(body, .12), dark(body, .15), 1, 1)
+    g = shadow(200, 262, 150, 10)
+    shape = ('M118 92 Q200 80 282 92 C326 98 350 140 362 196 C372 240 346 266 318 252 C298 242 286 214 268 204 '
+             'H132 C114 214 102 242 82 252 C54 266 28 240 38 196 C50 140 74 98 118 92Z')
+    g += f'<path d="{shape}" fill="url(#gp)"/>'
+    g += f'<path d="{shape}" fill="none" stroke="#000" stroke-opacity=".12" stroke-width="2"/>'
+    if style == 'sony':
+        g += f'<path d="M122 96 Q200 88 278 96 L270 112 Q200 106 130 112Z" fill="{accent}" opacity=".9"/>'
+        g += f'<rect x="160" y="100" width="80" height="54" rx="8" fill="{accent}"/>'
+        g += _dpad(104, 140, 6, dark(body, .35) if body != '#111827' else '#374151')
+        g += _abxy(296, 140, 15, 7, dark(body, .35) if body != '#111827' else '#374151')
+        g += _stick(160, 186, 15) + _stick(240, 186, 15)
+        g += '<path d="M180 168 h40" stroke="#60a5fa" stroke-width="3" stroke-linecap="round"/>'
+    else:
+        g += _stick(108, 138, 15) + _dpad(160, 188, 6, '#0b0f19') + _stick(240, 188, 15)
+        for (dx, dy), c in zip(((0, -14), (14, 0), (0, 14), (-14, 0)), ('#facc15', '#ef4444', '#22c55e', '#3b82f6')):
+            g += f'<circle cx="{292 + dx}" cy="{138 + dy}" r="7" fill="{c}"/>'
+        g += f'<circle cx="200" cy="120" r="10" fill="{accent}" stroke="#e5e7eb" stroke-width="2"/>'
+    return svg(g, defs)
+
 SILVER = ('#e5e7eb', '#9ca3af')
 SPACE = ('#4b5563', '#1f2937')
 GRAPHITE = ('#374151', '#111827')
@@ -396,10 +541,78 @@ CATEGORY_DEFAULTS = {
     'accessory.svg': mouse(('#64748b', '#1e293b'), '#6366f1'),
 }
 
+
+# ---------- New products (gaming) ----------
+IMAGES.update({
+    34: ('ps5-pro.svg', ps5(pro=True)),
+    35: ('ps5-slim.svg', ps5()),
+    36: ('xbox-series-x.svg', xbox_x()),
+    37: ('xbox-series-s.svg', xbox_s()),
+    38: ('switch-2.svg', switch2()),
+    39: ('switch-oled.svg', switch_oled()),
+    40: ('steam-deck-oled-512.svg', handheld('#27272a', ('#3b82f6', '#a855f7'))),
+    41: ('steam-deck-oled-1tb.svg', handheld('#27272a', ('#f97316', '#db2777'))),
+    42: ('rog-xbox-ally-x.svg', handheld('#18181b', ('#22c55e', '#0f766e'), 'ally')),
+    43: ('dualsense.svg', gamepad()),
+    44: ('xbox-controller.svg', gamepad('#1f2937', '#111827', 'xbox')),
+})
+CATEGORY_DEFAULTS['gaming.svg'] = gamepad('#64748b', '#1e293b', 'xbox')
+
+# ---------- Colour options ----------
+# product id -> (file prefix, [(colour name, hex)], function that draws one colour)
+VARIANTS = {
+    1: ('macbook-air', [('Sky Blue', '#a9c6df'), ('Silver', '#dfe1e4'), ('Starlight', '#efe3cf'), ('Midnight', '#2e3642')],
+        lambda c: laptop(pair(c), '#38bdf8', '#1e3a8a')),
+    2: ('macbook-pro-14', [('Space Black', '#2b2b2e'), ('Silver', '#dcdee1')],
+        lambda c: laptop(pair(c), '#a855f7', '#1e1b4b')),
+    4: ('zenbook-14-oled', [('Ponder Blue', '#334866'), ('Jade Black', '#2a2d31')],
+        lambda c: laptop(pair(c), '#06b6d4', '#4338ca')),
+    9: ('surface-laptop', [('Platinum', '#d9d9d6'), ('Sapphire', '#2f4a7a'), ('Dune', '#c8b8a2'), ('Black', '#2a2a2a')],
+        lambda c: laptop(pair(c), '#2563eb', '#93c5fd')),
+    10: ('imac-24', [('Blue', '#5b8fd6'), ('Green', '#6fbf8f'), ('Pink', '#ef8fa6'), ('Silver', '#d6d9dd'), ('Yellow', '#f2c94c'), ('Orange', '#f08a4b'), ('Purple', '#9b7fd1')],
+        lambda c: all_in_one(pair(c), light(c, .2), dark(c, .35))),
+    18: ('iphone-17-pro', [('Cosmic Orange', '#e8742e'), ('Deep Blue', '#2d3f5c'), ('Silver', '#dcdfe3')],
+        lambda c: phone(pair(c), light(c, .1), '#1e1b4b', 'square3')),
+    19: ('iphone-17', [('Lavender', '#b9a7e0'), ('Sage', '#a7bfa0'), ('Mist Blue', '#9fbad6'), ('White', '#f4f4f2'), ('Black', '#2b2b2e')],
+        lambda c: phone(pair(c), '#a78bfa', '#1e3a8a', 'two')),
+    20: ('galaxy-s25-ultra', [('Titanium Silverblue', '#8fa3b8'), ('Titanium Black', '#2e3033'), ('Titanium Gray', '#8a8b8d'), ('Titanium Whitesilver', '#e3e3e1')],
+        lambda c: phone(pair(c), '#38bdf8', '#312e81', 'vertical')),
+    21: ('pixel-10-pro', [('Moonstone', '#7d8a99'), ('Jade', '#b9d3c2'), ('Porcelain', '#ece6dc'), ('Obsidian', '#2a2a2c')],
+        lambda c: phone(pair(c), '#4ade80', '#0f766e', 'bar')),
+    28: ('wh-1000xm6', [('Black', '#2a2827'), ('Platinum Silver', '#cfcac2'), ('Midnight Blue', '#2c3a55')],
+        lambda c: headphones(pair(c))),
+    29: ('galaxy-buds3-pro', [('Silver', '#a7adb5'), ('White', '#f3f4f6')],
+        lambda c: earbuds(pair(c), (light(c, .5), c))),
+    30: ('mx-master-3s', [('Graphite', '#3a3b3f'), ('Pale Gray', '#cfd1d4')],
+        lambda c: mouse(pair(c), '#94a3b8')),
+    32: ('magic-keyboard', [('White', '#f8fafc'), ('Black', '#27272a')],
+        lambda c: keyboard(pair(c), light(c, .4) if c == '#27272a' else '#ffffff', numpad=True)),
+    39: ('switch-oled', [('Neon Red/Blue', '#ef4444|#3b82f6'), ('White', '#f8fafc|#f8fafc')],
+        lambda c: switch_oled(*c.split('|'))),
+    43: ('dualsense', [('White', '#f8fafc|#111827'), ('Midnight Black', '#2a2b30|#111827'), ('Cosmic Red', '#b91c1c|#111827'), ('Starlight Blue', '#6d9dd6|#f8fafc')],
+        lambda c: gamepad(*c.split('|'))),
+    44: ('xbox-controller', [('Carbon Black', '#1f2937|#111827'), ('Robot White', '#f1f5f9|#e5e7eb'), ('Shock Blue', '#2563eb|#1e3a8a'), ('Pulse Red', '#dc2626|#7f1d1d')],
+        lambda c: gamepad(*c.split('|'), style='xbox')),
+}
+
+
+def slug(name):
+    return ''.join(ch if ch.isalnum() else '-' for ch in name.lower()).strip('-').replace('--', '-')
+
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)
     for _, (name, content) in IMAGES.items():
         open(os.path.join(OUT, name), 'w').write(content)
     for name, content in CATEGORY_DEFAULTS.items():
         open(os.path.join(OUT, name), 'w').write(content)
-    print(f'wrote {len(IMAGES) + len(CATEGORY_DEFAULTS)} images to {os.path.normpath(OUT)}')
+    manifest = {}
+    for pid, (prefix, colours, draw) in VARIANTS.items():
+        manifest[pid] = []
+        for name, hex_ in colours:
+            file = f'{prefix}-{slug(name)}.svg'
+            open(os.path.join(OUT, file), 'w').write(draw(hex_))
+            manifest[pid].append({'name': name, 'hex': hex_.split('|')[0], 'image': f'images/{file}'})
+    import json
+    open(os.path.join(os.path.dirname(__file__), 'colors.json'), 'w').write(json.dumps(manifest, indent=2))
+    total = len(IMAGES) + len(CATEGORY_DEFAULTS) + sum(len(v) for v in manifest.values())
+    print(f'wrote {total} images to {os.path.normpath(OUT)}')

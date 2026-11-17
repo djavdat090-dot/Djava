@@ -1,5 +1,5 @@
 // Djava Tech admin: add, edit and delete products, then publish products.js to GitHub.
-const CATEGORIES = ['Laptops', 'Desktops', 'Monitors', 'Components', 'Phones', 'Audio', 'Accessories'];
+const CATEGORIES = ['Laptops', 'Desktops', 'Monitors', 'Components', 'Phones', 'Audio', 'Gaming', 'Accessories'];
 const DRAFT_KEY = 'djava-admin-draft';
 const CONN_KEY = 'djava-admin-conn';
 const FILE_PATH = 'products.js';
@@ -173,6 +173,16 @@ function readForm() {
   if (image) p.image = image;
 
   const errors = [];
+  const colors = [];
+  for (const line of f.colors.value.split('\n').map(l => l.trim()).filter(Boolean)) {
+    const [name, hex, img] = line.split(',').map(x => x.trim());
+    if (!name || !/^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(hex || '')) { errors.push(`a color like “Black, #000000” (check “${line}”)`); continue; }
+    colors.push(img ? { name, hex, image: img } : { name, hex });
+  }
+  if (colors.length) {
+    p.colors = colors;
+    if (!p.image && colors[0].image) p.image = colors[0].image;
+  }
   if (!p.brand) errors.push('brand');
   if (!p.name) errors.push('product name');
   if (!(p.price > 0)) errors.push('a price above 0');
@@ -189,6 +199,7 @@ function fillForm(p) {
   form.rating.value = p?.rating ?? '';
   form.reviews.value = p?.reviews ?? '';
   form.specs.value = (p?.specs ?? []).join('\n');
+  form.colors.value = (p?.colors ?? []).map(c => [c.name, c.hex, c.image].filter(Boolean).join(', ')).join('\n');
   form.image.value = p?.image ?? '';
   $('#imageFile').value = '';
   previewOverride = '';
@@ -254,7 +265,8 @@ function renderTable() {
       <div class="pthumb">${thumb(p)}</div>
       <div class="pinfo">
         <div class="pname">${esc(p.brand)} ${esc(p.name)} ${tag}</div>
-        <div class="muted">${esc(p.category)} · ${money(p.price)}${p.was ? ` <s>${money(p.was)}</s>` : ''}</div>
+        <div class="muted">${esc(p.category)} · ${money(p.price)}${p.was ? ` <s>${money(p.was)}</s>` : ''}${(p.colors || []).length
+          ? ` · <span class="mini-swatches">${p.colors.map(c => `<i style="background:${/^#[0-9a-f]{3,8}$/i.test(c.hex) ? c.hex : '#ccc'}" title="${esc(c.name)}"></i>`).join('')}</span>` : ''}</div>
       </div>
       <div class="pactions">
         <button class="btn btn-ghost btn-sm" data-edit="${p.id}">Edit</button>
