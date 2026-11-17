@@ -14,7 +14,8 @@ window.PRODUCTS = [
       "256 GB SSD",
       "13.6\" Liquid Retina display",
       "Up to 18 hours battery"
-    ]
+    ],
+    "image": "images/macbook-air.svg"
   },
   {
     "id": 2,
@@ -30,7 +31,8 @@ window.PRODUCTS = [
       "512 GB SSD",
       "14.2\" Liquid Retina XDR display",
       "Thunderbolt 5 ports"
-    ]
+    ],
+    "image": "images/macbook-pro-14.svg"
   },
   {
     "id": 3,
@@ -47,7 +49,8 @@ window.PRODUCTS = [
       "14\" 3K OLED 120Hz",
       "32 GB RAM, 1 TB SSD",
       "Aluminum CNC chassis"
-    ]
+    ],
+    "image": "images/rog-zephyrus-g14.svg"
   },
   {
     "id": 4,
@@ -64,7 +67,8 @@ window.PRODUCTS = [
       "16 GB RAM, 1 TB SSD",
       "1.2 kg",
       "Wi-Fi 7"
-    ]
+    ],
+    "image": "images/zenbook-14-oled.svg"
   },
   {
     "id": 5,
@@ -80,7 +84,8 @@ window.PRODUCTS = [
       "32 GB RAM, 1 TB SSD",
       "Under 1.1 kg",
       "MIL-STD tested"
-    ]
+    ],
+    "image": "images/thinkpad-x1-carbon.svg"
   },
   {
     "id": 6,
@@ -95,7 +100,8 @@ window.PRODUCTS = [
       "NVIDIA GeForce RTX 5080",
       "16\" 2.5K 240Hz OLED",
       "32 GB RAM, 2 TB SSD"
-    ]
+    ],
+    "image": "images/legion-pro-7i.svg"
   },
   {
     "id": 7,
@@ -111,7 +117,8 @@ window.PRODUCTS = [
       "14.5\" 3.2K OLED touch",
       "32 GB RAM, 1 TB SSD",
       "Haptic touchpad"
-    ]
+    ],
+    "image": "images/xps-14.svg"
   },
   {
     "id": 8,
@@ -126,7 +133,8 @@ window.PRODUCTS = [
       "Intel Core Ultra 7",
       "14\" 2.8K OLED 120Hz",
       "Pen included"
-    ]
+    ],
+    "image": "images/spectre-x360-14.svg"
   },
   {
     "id": 9,
@@ -141,7 +149,8 @@ window.PRODUCTS = [
       "16 GB RAM, 512 GB SSD",
       "13.8\" PixelSense touch",
       "Copilot+ PC"
-    ]
+    ],
+    "image": "images/surface-laptop.svg"
   },
   {
     "id": 10,
@@ -156,7 +165,8 @@ window.PRODUCTS = [
       "24\" 4.5K Retina display",
       "16 GB memory, 256 GB SSD",
       "Magic Keyboard & Mouse included"
-    ]
+    ],
+    "image": "images/imac-24.svg"
   },
   {
     "id": 11,
@@ -172,7 +182,8 @@ window.PRODUCTS = [
       "256 GB SSD",
       "5×5\" compact design",
       "Front USB-C ports"
-    ]
+    ],
+    "image": "images/mac-mini.svg"
   },
   {
     "id": 12,
@@ -188,7 +199,8 @@ window.PRODUCTS = [
       "NVIDIA GeForce RTX 5080",
       "32 GB DDR5",
       "2 TB SSD, liquid cooling"
-    ]
+    ],
+    "image": "images/alienware-aurora.svg"
   },
   {
     "id": 13,
@@ -203,7 +215,8 @@ window.PRODUCTS = [
       "NVIDIA GeForce RTX 5070",
       "32 GB DDR5",
       "1 TB SSD, RGB case"
-    ]
+    ],
+    "image": "images/rog-strix-desktop.svg"
   },
   {
     "id": 14,
@@ -218,7 +231,8 @@ window.PRODUCTS = [
       "600 nits brightness",
       "12 MP Center Stage camera",
       "Six-speaker sound"
-    ]
+    ],
+    "image": "images/studio-display.svg"
   },
   {
     "id": 15,
@@ -234,7 +248,8 @@ window.PRODUCTS = [
       "240Hz, 0.03 ms",
       "HDR True Black 400",
       "Smart TV apps built in"
-    ]
+    ],
+    "image": "images/odyssey-g9.svg"
   },
   {
     "id": 16,
@@ -249,7 +264,8 @@ window.PRODUCTS = [
       "240Hz refresh",
       "DisplayPort 2.1",
       "Custom heatsink"
-    ]
+    ],
+    "image": "images/rog-swift-oled-27.svg"
   },
   {
     "id": 17,
@@ -264,7 +280,8 @@ window.PRODUCTS = [
       "120Hz",
       "USB-C 140W charging",
       "Built-in Ethernet & hub"
-    ]
+    ],
+    "image": "images/ultrasharp-27.svg"
   },
   {
     "id": 18,
@@ -279,7 +296,8 @@ window.PRODUCTS = [
       "A19 Pro chip",
       "48 MP Pro camera system",
       "256 GB"
-    ]
+    ],
+    "image": "images/iphone-17-pro.svg"
   },
   {
     "id": 19,
@@ -294,7 +312,8 @@ window.PRODUCTS = [
       "A19 chip",
       "48 MP Dual Fusion camera",
       "256 GB"
-    ]
+    ],
+    "image": "images/iphone-17.svg"
   },
   {
     "id": 20,
@@ -310,7 +329,8 @@ window.PRODUCTS = [
       "Snapdragon 8 Elite for Galaxy",
       "200 MP camera, 5× zoom",
       "Built-in S Pen"
-    ]
+    ],
+    "image": "images/galaxy-s25-ultra.svg"
   },
   {
     "id": 21,
@@ -325,7 +345,8 @@ window.PRODUCTS = [
       "Google Tensor G5",
       "50 MP triple camera, 5× zoom",
       "7 years of updates"
-    ]
+    ],
+    "image": "images/pixel-10-pro.svg"
   },
   {
     "id": 22,
@@ -340,7 +361,8 @@ window.PRODUCTS = [
       "DLSS 4 with Multi Frame Generation",
       "PCIe 5.0",
       "Double flow-through cooler"
-    ]
+    ],
+    "image": "images/rtx-5090.svg"
   },
   {
     "id": 23,
@@ -355,7 +377,8 @@ window.PRODUCTS = [
       "DLSS 4",
       "Ray tracing cores",
       "PCIe 5.0"
-    ]
+    ],
+    "image": "images/rtx-5070.svg"
   },
   {
     "id": 24,
@@ -371,7 +394,8 @@ window.PRODUCTS = [
       "2nd-gen 3D V-Cache",
       "Up to 5.2 GHz",
       "AM5 socket"
-    ]
+    ],
+    "image": "images/ryzen-7-9800x3d.svg"
   },
   {
     "id": 25,
@@ -387,7 +411,8 @@ window.PRODUCTS = [
       "PCIe 4.0 NVMe",
       "Heatsink option",
       "5-year warranty"
-    ]
+    ],
+    "image": "images/990-pro-ssd.svg"
   },
   {
     "id": 26,
@@ -402,7 +427,8 @@ window.PRODUCTS = [
       "6000 MT/s, CL30",
       "Intel XMP / AMD EXPO",
       "Low-profile heat spreader"
-    ]
+    ],
+    "image": "images/vengeance-ddr5.svg"
   },
   {
     "id": 27,
@@ -417,7 +443,8 @@ window.PRODUCTS = [
       "Heart-rate sensing",
       "Up to 8 hours listening",
       "USB-C MagSafe case"
-    ]
+    ],
+    "image": "images/airpods-pro-3.svg"
   },
   {
     "id": 28,
@@ -433,7 +460,8 @@ window.PRODUCTS = [
       "30-hour battery",
       "Foldable design",
       "Multipoint Bluetooth"
-    ]
+    ],
+    "image": "images/wh-1000xm6.svg"
   },
   {
     "id": 29,
@@ -449,7 +477,8 @@ window.PRODUCTS = [
       "24-bit Hi-Fi audio",
       "IP57",
       "Wireless charging case"
-    ]
+    ],
+    "image": "images/galaxy-buds3-pro.svg"
   },
   {
     "id": 30,
@@ -464,7 +493,8 @@ window.PRODUCTS = [
       "Quiet clicks",
       "MagSpeed scroll wheel",
       "Up to 70 days battery"
-    ]
+    ],
+    "image": "images/mx-master-3s.svg"
   },
   {
     "id": 31,
@@ -479,7 +509,8 @@ window.PRODUCTS = [
       "Multi-device (3)",
       "USB-C rechargeable",
       "Mac & Windows layouts"
-    ]
+    ],
+    "image": "images/mx-keys-s.svg"
   },
   {
     "id": 32,
@@ -494,7 +525,8 @@ window.PRODUCTS = [
       "Numeric keypad",
       "USB-C charging",
       "Wireless"
-    ]
+    ],
+    "image": "images/magic-keyboard.svg"
   },
   {
     "id": 33,
@@ -510,6 +542,7 @@ window.PRODUCTS = [
       "Command dial + macro keys",
       "Chroma RGB",
       "Magnetic wrist rest"
-    ]
+    ],
+    "image": "images/blackwidow-v4-pro.svg"
   }
 ];

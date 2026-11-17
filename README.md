@@ -7,6 +7,9 @@ A static storefront for computers and electronics from brands like Apple, ASUS, 
 - "Shop by brand" section
 - Product detail modal with specs and quantity picker
 - Cart drawer saved in the browser (localStorage), with shipping and tax totals
+- Product illustrations for every item (`images/`, drawn by `tools/make_product_images.py`)
+- Shipping to any country: the customer picks a country in the cart or at checkout, and
+  shipping cost, delivery time and tax update automatically
 - Demo checkout form (no payment is processed)
 - Works on phones: swipeable categories, bottom-sheet product details,
   swipe to close the cart and product sheet, large tap targets, phone keyboards
@@ -24,7 +27,10 @@ python3 -m http.server 8000
 
 Installing the site as an app and using it offline only work when it is served over http or https, not opened as a file.
 
-Products are stored in `products.js`. Prices are examples; update them to your real prices before selling.
+Products are stored in `products.js`.
+
+Shipping prices, delivery times, zones and blocked countries are set in the `SHIPPING`
+block near the top of `app.js`. Prices are examples; update them to your real prices before selling.
 
 ## Admin page
 Open `admin.html` (live: https://djavdat090-dot.github.io/Djava/admin.html) to add, edit and delete

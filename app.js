@@ -33,9 +33,46 @@ const CATEGORIES = ['All', ...Object.keys(ICONS)];
 const FEATURED_BRANDS = ['Apple', 'ASUS', 'Samsung', 'Dell', 'Lenovo', 'HP', 'Microsoft', 'Google', 'Sony', 'NVIDIA', 'AMD', 'Logitech']
   .filter(b => PRODUCTS.some(p => p.brand === b));
 // Product photo if one is set, otherwise the category icon
-const media = p => p.image
-  ? `<img src="${p.image}" alt="" loading="lazy" onerror="this.replaceWith(document.createRange().createContextualFragment(ICONS['${p.category}']))">`
-  : ICONS[p.category];
+const CATEGORY_IMAGES = {
+  Laptops: 'images/laptop.svg', Desktops: 'images/desktop.svg', Monitors: 'images/monitor.svg', Components: 'images/component.svg',
+  Phones: 'images/phone.svg', Audio: 'images/audio.svg', Accessories: 'images/accessory.svg',
+};
+const media = p => `<img src="${p.image || CATEGORY_IMAGES[p.category]}" alt="${p.brand} ${p.name}" loading="lazy" onerror="this.onerror=null;this.src='${CATEGORY_IMAGES[p.category]}'">`;
+
+// ---------- Shipping ----------
+// Edit prices, delivery times and zones here. Countries not listed in a zone use "Rest of world".
+// Add country codes to `blocked` to stop shipping there.
+const SHIPPING = {
+  zones: [
+    { name: 'United States', countries: ['US'], price: 9.99, freeOver: 99, days: '2–5', tax: 0.08 },
+    { name: 'Canada & Mexico', countries: ['CA', 'MX'], price: 19.99, freeOver: 499, days: '4–8' },
+    { name: 'Europe', countries: 'AD AL AT BA BE BG CH CY CZ DE DK EE ES FI FR GB GR HR HU IE IS IT LI LT LU LV MC MD ME MK MT NL NO PL PT RO RS SE SI SK SM UA VA XK'.split(' '), price: 24.99, freeOver: 999, days: '5–10' },
+    { name: 'Rest of world', countries: [], price: 39.99, freeOver: null, days: '7–14' },
+  ],
+  blocked: [],
+};
+const COUNTRY_CODES = ('AD AE AF AG AI AL AM AO AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GT GU GW GY HK HN HR HT HU ID IE IL IM IN IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG US UY UZ VA VC VE VG VI VN VU WF WS XK YE YT ZA ZM ZW')
+  .split(' ').filter(c => !SHIPPING.blocked.includes(c));
+const regionNames = (() => { try { return new Intl.DisplayNames(['en'], { type: 'region' }); } catch { return null; } })();
+const countryName = code => (code === 'XK' ? 'Kosovo' : regionNames?.of(code)) || code;
+const COUNTRIES = COUNTRY_CODES.map(code => ({ code, name: countryName(code) })).sort((a, b) => a.name.localeCompare(b.name));
+const zoneFor = code => SHIPPING.zones.find(z => z.countries.includes(code)) || SHIPPING.zones[SHIPPING.zones.length - 1];
+const countryOptions = selected => COUNTRIES.map(c => `<option value="${c.code}"${c.code === selected ? ' selected' : ''}>${esc(c.name)}</option>`).join('');
+
+function initialCountry() {
+  try { const saved = localStorage.getItem('djava-country'); if (COUNTRY_CODES.includes(saved)) return saved; } catch {}
+  for (const lang of navigator.languages || [navigator.language]) {
+    const region = (lang || '').split('-')[1]?.toUpperCase();
+    if (COUNTRY_CODES.includes(region)) return region;
+  }
+  return 'US';
+}
+let country = initialCountry();
+function setCountry(code) {
+  if (!COUNTRY_CODES.includes(code)) return;
+  country = code;
+  try { localStorage.setItem('djava-country', code); } catch {}
+}
 const BRANDS = ['All brands', ...[...new Set(PRODUCTS.map(p => p.brand))].sort()];
 const money = n => n.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 const stars = r => '★'.repeat(Math.round(r)) + '☆'.repeat(5 - Math.round(r));
@@ -88,7 +125,7 @@ function renderProducts() {
   $('#resultCount').textContent = `${list.length} product${list.length === 1 ? '' : 's'}`;
   $('#products').innerHTML = list.length ? list.map(p => `
     <article class="card">
-      <button class="card-media" style="background:${p.image ? 'var(--photo-bg)' : GRADIENTS[p.category]}" data-view="${p.id}" aria-label="View ${p.brand} ${p.name}">
+      <button class="card-media" style="background:var(--photo-bg)" data-view="${p.id}" aria-label="View ${p.brand} ${p.name}">
         <span class="brand-tag">${p.brand}</span>
         ${p.was ? `<span class="badge">-${Math.round((1 - p.price / p.was) * 100)}%</span>` : ''}
         ${media(p)}
@@ -110,7 +147,7 @@ function openProduct(id) {
   const modal = $('#productModal');
   modal.innerHTML = `
     <div class="modal-grid">
-      <div class="modal-media" style="background:${p.image ? 'var(--photo-bg)' : GRADIENTS[p.category]}">${media(p)}</div>
+      <div class="modal-media" style="background:var(--photo-bg)">${media(p)}</div>
       <div class="modal-body">
         <button class="icon-btn" data-close aria-label="Close">✕</button>
         <span class="card-cat">${p.brand} · ${p.category}</span>
@@ -142,9 +179,23 @@ function addToCart(id, qty = 1) {
 
 function totals() {
   const subtotal = Object.entries(cart).reduce((s, [id, q]) => s + PRODUCTS.find(p => p.id == id).price * q, 0);
-  const shipping = subtotal === 0 || subtotal >= 99 ? 0 : 9.99;
-  const tax = subtotal * 0.08;
-  return { subtotal, shipping, tax, total: subtotal + shipping + tax };
+  const zone = zoneFor(country);
+  const shipping = subtotal === 0 || (zone.freeOver != null && subtotal >= zone.freeOver) ? 0 : zone.price;
+  const tax = subtotal * (zone.tax || 0);
+  return { subtotal, shipping, tax, total: subtotal + shipping + tax, zone };
+}
+
+// Price rows shared by the cart and checkout
+function summaryRows(t) {
+  const free = t.zone.freeOver != null && t.shipping > 0
+    ? `<div class="ship-note">Add ${money(t.zone.freeOver - t.subtotal)} more for free shipping to ${esc(countryName(country))}</div>` : '';
+  return `
+    <div class="row"><span>Subtotal</span><span>${money(t.subtotal)}</span></div>
+    <div class="row"><span>Shipping <small>(${t.zone.days} business days)</small></span><span>${t.shipping ? money(t.shipping) : 'Free'}</span></div>
+    ${free}
+    ${t.zone.tax ? `<div class="row"><span>Sales tax (${Math.round(t.zone.tax * 100)}%)</span><span>${money(t.tax)}</span></div>`
+      : '<div class="ship-note">Import duties and taxes may be charged on delivery.</div>'}
+    <div class="row total"><span>Total</span><span>${money(t.total)}</span></div>`;
 }
 
 function renderCart() {
@@ -158,7 +209,7 @@ function renderCart() {
   $('#cartItems').innerHTML = entries.map(([id, q]) => {
     const p = PRODUCTS.find(x => x.id == id);
     return `<div class="line">
-      <div class="line-thumb" style="background:${p.image ? 'var(--photo-bg)' : GRADIENTS[p.category]}">${media(p)}</div>
+      <div class="line-thumb" style="background:var(--photo-bg)">${media(p)}</div>
       <div>
         <div class="line-title">${p.brand} ${p.name}</div>
         <div class="line-meta">
@@ -171,39 +222,65 @@ function renderCart() {
   }).join('');
   const t = totals();
   $('#cartFoot').innerHTML = `
-    <div class="row"><span>Subtotal</span><span>${money(t.subtotal)}</span></div>
-    <div class="row"><span>Shipping</span><span>${t.shipping ? money(t.shipping) : 'Free'}</span></div>
-    <div class="row"><span>Tax (8%)</span><span>${money(t.tax)}</span></div>
-    <div class="row total"><span>Total</span><span>${money(t.total)}</span></div>
+    <label class="ship-to"><span>Ship to</span><select id="cartCountry" autocomplete="country">${countryOptions(country)}</select></label>
+    ${summaryRows(t)}
     <button class="btn btn-primary btn-block" data-checkout>Checkout</button>`;
+  $('#cartCountry').onchange = e => { setCountry(e.target.value); renderCart(); };
+}
+
+function renderCheckoutFoot() {
+  const t = totals();
+  const open = $('#cartFoot .summary-details')?.open ? ' open' : '';
+  $('#cartFoot').innerHTML = `
+    <details class="summary-details"${open}>
+      <summary><span>Order total <small>(details)</small></span><strong>${money(t.total)}</strong></summary>
+      <div class="summary-body">${summaryRows(t)}</div>
+    </details>
+    <button class="btn btn-primary btn-block" type="submit" form="checkoutForm">Place order</button>
+    <button class="btn btn-ghost btn-block" data-back>Back to cart</button>`;
+}
+
+function updateAddressLabels(form) {
+  const us = country === 'US';
+  form.zip.placeholder = us ? 'ZIP code' : 'Postal code';
+  form.region.placeholder = us ? 'State' : 'State / Province / Region' + (['CA', 'AU'].includes(country) ? '' : ' (optional)');
+  form.region.required = ['US', 'CA', 'AU'].includes(country);
+  $('#deliveryNote').textContent = `Delivery to ${countryName(country)}: ${zoneFor(country).days} business days`;
 }
 
 function renderCheckout() {
-  const t = totals();
   $('#cartItems').innerHTML = `
     <form class="form" id="checkoutForm">
       <h3>Shipping details</h3>
+      <label class="field-label" for="shipCountry">Country / Region</label>
+      <select required name="country" id="shipCountry" autocomplete="country">${countryOptions(country)}</select>
+      <p class="ship-note" id="deliveryNote"></p>
       <input required name="name" placeholder="Full name" autocomplete="name">
       <input required type="email" name="email" placeholder="Email" autocomplete="email" inputmode="email">
-      <input required name="address" placeholder="Street address" autocomplete="street-address">
-      <div class="two"><input required name="city" placeholder="City" autocomplete="address-level2"><input required name="zip" placeholder="ZIP / Postal code" autocomplete="postal-code"></div>
+      <input required type="tel" name="phone" placeholder="Phone (for the courier)" autocomplete="tel" inputmode="tel">
+      <input required name="address" placeholder="Street address, apartment" autocomplete="street-address">
+      <div class="two"><input required name="city" placeholder="City" autocomplete="address-level2"><input required name="zip" placeholder="Postal code" autocomplete="postal-code"></div>
+      <input name="region" placeholder="State / Province / Region" autocomplete="address-level1">
       <h3>Payment</h3>
       <p class="row" style="font-size:.85rem">Demo store — no card is charged and no payment data is stored.</p>
       <input required name="card" placeholder="Card number (demo)" inputmode="numeric" autocomplete="cc-number" pattern="[0-9 ]{12,23}">
       <div class="two"><input required name="exp" placeholder="MM/YY" inputmode="numeric" autocomplete="cc-exp" pattern="(0[1-9]|1[0-2])/[0-9]{2}"><input required name="cvc" placeholder="CVC" inputmode="numeric" autocomplete="cc-csc" pattern="[0-9]{3,4}"></div>
     </form>`;
-  $('#cartFoot').innerHTML = `
-    <div class="row total"><span>Total</span><span>${money(t.total)}</span></div>
-    <button class="btn btn-primary btn-block" type="submit" form="checkoutForm">Place order</button>
-    <button class="btn btn-ghost btn-block" data-back>Back to cart</button>`;
-  $('#checkoutForm').onsubmit = e => {
+  const form = $('#checkoutForm');
+  renderCheckoutFoot();
+  updateAddressLabels(form);
+  form.country.onchange = e => { setCountry(e.target.value); updateAddressLabels(form); renderCheckoutFoot(); };
+  form.onsubmit = e => {
     e.preventDefault();
     const name = new FormData(e.target).get('name').split(' ')[0];
+    const where = `${esc(form.city.value.trim())}, ${esc(countryName(country))}`;
+    const days = zoneFor(country).days;
     const order = 'DJ-' + Math.random().toString(36).slice(2, 8).toUpperCase();
     cart = {}; save();
     $('#cartCount').textContent = 0;
     $('#cartItems').innerHTML = `<div class="success"><div class="check">✓</div>
-      <h3>Thank you, ${name.replace(/[<>&"]/g, '')}!</h3><p>Order <b>${order}</b> is confirmed. A receipt is on its way.</p></div>`;
+      <h3>Thank you, ${esc(name)}!</h3><p>Order <b>${order}</b> is confirmed. A receipt is on its way.</p>
+      <p class="ship-note">Shipping to ${where} · arrives in ${days} business days</p></div>`;
     $('#cartFoot').innerHTML = '<button class="btn btn-primary btn-block" data-closecart>Keep shopping</button>';
   };
 }
