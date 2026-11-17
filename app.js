@@ -20,47 +20,96 @@ const GRADIENTS = {
 };
 
 const PRODUCTS = [
-  { id: 1, name: 'AeroBook Pro 14"', category: 'Laptops', price: 1299, was: 1499, rating: 4.8, reviews: 412,
-    specs: ['14" 2.8K 120Hz display', '16-core CPU, 32 GB RAM', '1 TB NVMe SSD', '18-hour battery'] },
-  { id: 2, name: 'Titan G16 Gaming Laptop', category: 'Laptops', price: 1899, rating: 4.7, reviews: 238,
-    specs: ['16" QHD+ 240Hz', 'RTX-class 8 GB GPU', '32 GB DDR5', 'Per-key RGB keyboard'] },
-  { id: 3, name: 'Slate 13 Ultralight', category: 'Laptops', price: 849, was: 949, rating: 4.5, reviews: 190,
-    specs: ['13.3" FHD touchscreen', '0.98 kg aluminum body', '16 GB RAM, 512 GB SSD', 'Wi-Fi 7'] },
-  { id: 4, name: 'Forge X Gaming Tower', category: 'Desktops', price: 2199, rating: 4.9, reviews: 156,
-    specs: ['12-core CPU, liquid cooled', 'RTX-class 16 GB GPU', '64 GB DDR5', '2 TB Gen4 SSD'] },
-  { id: 5, name: 'Studio Mini PC', category: 'Desktops', price: 699, was: 799, rating: 4.6, reviews: 98,
-    specs: ['Palm-sized chassis', '8-core CPU', '16 GB RAM, 1 TB SSD', 'Dual 4K output'] },
-  { id: 6, name: 'Vista 27" 4K IPS', category: 'Monitors', price: 379, rating: 4.7, reviews: 521,
-    specs: ['27" 3840×2160 IPS', '98% DCI-P3', 'USB-C 90W', 'Height-adjustable stand'] },
-  { id: 7, name: 'Hyper 32" Curved 165Hz', category: 'Monitors', price: 449, was: 549, rating: 4.6, reviews: 302,
-    specs: ['32" 1440p VA 1500R', '165Hz, 1ms', 'HDR400', 'Adaptive sync'] },
-  { id: 8, name: 'Nova RTX GPU 16 GB', category: 'Components', price: 899, rating: 4.8, reviews: 344,
-    specs: ['16 GB GDDR6X', 'Ray tracing + AI upscaling', 'Triple-fan cooler', 'PCIe 4.0'] },
-  { id: 9, name: 'Quantum 2 TB NVMe SSD', category: 'Components', price: 149, was: 189, rating: 4.9, reviews: 1204,
-    specs: ['7,400 MB/s read', 'PCIe Gen4 x4', 'Heatsink included', '5-year warranty'] },
-  { id: 10, name: 'Velocity 32 GB DDR5 Kit', category: 'Components', price: 119, rating: 4.7, reviews: 640,
-    specs: ['2×16 GB, 6000 MT/s', 'CL30 low latency', 'XMP / EXPO profiles', 'Low-profile heat spreader'] },
-  { id: 11, name: 'Pixelon 9 Smartphone', category: 'Phones', price: 799, rating: 4.6, reviews: 877,
-    specs: ['6.4" OLED 120Hz', '50 MP triple camera', '256 GB storage', 'All-day battery'] },
-  { id: 12, name: 'Pixelon 9a', category: 'Phones', price: 449, was: 499, rating: 4.5, reviews: 432,
-    specs: ['6.1" OLED', '48 MP camera', '128 GB storage', '5G'] },
-  { id: 13, name: 'Echo ANC Headphones', category: 'Audio', price: 279, was: 349, rating: 4.8, reviews: 990,
-    specs: ['Adaptive noise cancelling', '40-hour battery', 'Multipoint Bluetooth', 'Spatial audio'] },
-  { id: 14, name: 'Pulse Wireless Earbuds', category: 'Audio', price: 129, rating: 4.4, reviews: 512,
-    specs: ['ANC + transparency', '8h + 24h case', 'IPX4', 'Wireless charging'] },
-  { id: 15, name: 'Keystroke Mechanical Keyboard', category: 'Accessories', price: 109, rating: 4.7, reviews: 715,
-    specs: ['Hot-swappable switches', 'Wireless + USB-C', 'PBT keycaps', 'RGB backlight'] },
-  { id: 16, name: 'Glide Pro Wireless Mouse', category: 'Accessories', price: 69, was: 89, rating: 4.6, reviews: 468,
-    specs: ['26K DPI sensor', '63 g ultralight', '90-hour battery', '2.4 GHz + Bluetooth'] },
+  // Laptops
+  { id: 1, brand: 'Apple', name: 'MacBook Air 13" (M4)', category: 'Laptops', price: 999, rating: 4.8, reviews: 2140,
+    specs: ['Apple M4 chip, 10-core CPU', '16 GB unified memory', '256 GB SSD', '13.6" Liquid Retina display', 'Up to 18 hours battery'] },
+  { id: 2, brand: 'Apple', name: 'MacBook Pro 14" (M4 Pro)', category: 'Laptops', price: 1999, rating: 4.9, reviews: 1388,
+    specs: ['Apple M4 Pro chip', '24 GB unified memory', '512 GB SSD', '14.2" Liquid Retina XDR display', 'Thunderbolt 5 ports'] },
+  { id: 3, brand: 'ASUS', name: 'ROG Zephyrus G14', category: 'Laptops', price: 1799, was: 1999, rating: 4.7, reviews: 864,
+    specs: ['AMD Ryzen AI 9 processor', 'NVIDIA GeForce RTX 5070 Ti', '14" 3K OLED 120Hz', '32 GB RAM, 1 TB SSD', 'Aluminum CNC chassis'] },
+  { id: 4, brand: 'ASUS', name: 'Zenbook 14 OLED', category: 'Laptops', price: 949, was: 1099, rating: 4.6, reviews: 612,
+    specs: ['Intel Core Ultra 7', '14" 3K OLED touch display', '16 GB RAM, 1 TB SSD', '1.2 kg', 'Wi-Fi 7'] },
+  { id: 5, brand: 'Lenovo', name: 'ThinkPad X1 Carbon', category: 'Laptops', price: 1749, rating: 4.7, reviews: 530,
+    specs: ['Intel Core Ultra 7', '14" 2.8K OLED', '32 GB RAM, 1 TB SSD', 'Under 1.1 kg', 'MIL-STD tested'] },
+  { id: 6, brand: 'Lenovo', name: 'Legion Pro 7i', category: 'Laptops', price: 2499, rating: 4.8, reviews: 402,
+    specs: ['Intel Core Ultra 9', 'NVIDIA GeForce RTX 5080', '16" 2.5K 240Hz OLED', '32 GB RAM, 2 TB SSD'] },
+  { id: 7, brand: 'Dell', name: 'XPS 14', category: 'Laptops', price: 1499, was: 1699, rating: 4.5, reviews: 377,
+    specs: ['Intel Core Ultra 7', '14.5" 3.2K OLED touch', '32 GB RAM, 1 TB SSD', 'Haptic touchpad'] },
+  { id: 8, brand: 'HP', name: 'Spectre x360 14', category: 'Laptops', price: 1449, rating: 4.6, reviews: 455,
+    specs: ['2-in-1 convertible', 'Intel Core Ultra 7', '14" 2.8K OLED 120Hz', 'Pen included'] },
+  { id: 9, brand: 'Microsoft', name: 'Surface Laptop 13.8"', category: 'Laptops', price: 999, rating: 4.5, reviews: 690,
+    specs: ['Snapdragon X Elite', '16 GB RAM, 512 GB SSD', '13.8" PixelSense touch', 'Copilot+ PC'] },
+
+  // Desktops
+  { id: 10, brand: 'Apple', name: 'iMac 24" (M4)', category: 'Desktops', price: 1299, rating: 4.8, reviews: 920,
+    specs: ['Apple M4 chip', '24" 4.5K Retina display', '16 GB memory, 256 GB SSD', 'Magic Keyboard & Mouse included'] },
+  { id: 11, brand: 'Apple', name: 'Mac mini (M4)', category: 'Desktops', price: 599, rating: 4.9, reviews: 1810,
+    specs: ['Apple M4 chip', '16 GB unified memory', '256 GB SSD', '5×5" compact design', 'Front USB-C ports'] },
+  { id: 12, brand: 'Dell', name: 'Alienware Aurora Gaming Desktop', category: 'Desktops', price: 2299, was: 2499, rating: 4.6, reviews: 288,
+    specs: ['Intel Core Ultra 9', 'NVIDIA GeForce RTX 5080', '32 GB DDR5', '2 TB SSD, liquid cooling'] },
+  { id: 13, brand: 'ASUS', name: 'ROG Strix G16CH Desktop', category: 'Desktops', price: 1899, rating: 4.5, reviews: 164,
+    specs: ['Intel Core i7', 'NVIDIA GeForce RTX 5070', '32 GB DDR5', '1 TB SSD, RGB case'] },
+
+  // Monitors
+  { id: 14, brand: 'Apple', name: 'Studio Display', category: 'Monitors', price: 1599, rating: 4.6, reviews: 744,
+    specs: ['27" 5K Retina', '600 nits brightness', '12 MP Center Stage camera', 'Six-speaker sound'] },
+  { id: 15, brand: 'Samsung', name: 'Odyssey OLED G9 49"', category: 'Monitors', price: 1199, was: 1599, rating: 4.7, reviews: 518,
+    specs: ['49" Dual QHD curved OLED', '240Hz, 0.03 ms', 'HDR True Black 400', 'Smart TV apps built in'] },
+  { id: 16, brand: 'ASUS', name: 'ROG Swift OLED 27" 4K', category: 'Monitors', price: 999, rating: 4.8, reviews: 301,
+    specs: ['27" 4K QD-OLED', '240Hz refresh', 'DisplayPort 2.1', 'Custom heatsink'] },
+  { id: 17, brand: 'Dell', name: 'UltraSharp 27 4K USB-C Hub', category: 'Monitors', price: 579, rating: 4.7, reviews: 866,
+    specs: ['27" 4K IPS Black', '120Hz', 'USB-C 140W charging', 'Built-in Ethernet & hub'] },
+
+  // Phones
+  { id: 18, brand: 'Apple', name: 'iPhone 17 Pro', category: 'Phones', price: 1099, rating: 4.8, reviews: 3120,
+    specs: ['6.3" Super Retina XDR, ProMotion', 'A19 Pro chip', '48 MP Pro camera system', '256 GB'] },
+  { id: 19, brand: 'Apple', name: 'iPhone 17', category: 'Phones', price: 799, rating: 4.7, reviews: 2650,
+    specs: ['6.3" display, 120Hz', 'A19 chip', '48 MP Dual Fusion camera', '256 GB'] },
+  { id: 20, brand: 'Samsung', name: 'Galaxy S25 Ultra', category: 'Phones', price: 1099, was: 1299, rating: 4.7, reviews: 2215,
+    specs: ['6.9" QHD+ AMOLED', 'Snapdragon 8 Elite for Galaxy', '200 MP camera, 5× zoom', 'Built-in S Pen'] },
+  { id: 21, brand: 'Google', name: 'Pixel 10 Pro', category: 'Phones', price: 999, rating: 4.6, reviews: 980,
+    specs: ['6.3" Super Actua display', 'Google Tensor G5', '50 MP triple camera, 5× zoom', '7 years of updates'] },
+
+  // Components
+  { id: 22, brand: 'NVIDIA', name: 'GeForce RTX 5090 Founders Edition', category: 'Components', price: 1999, rating: 4.8, reviews: 640,
+    specs: ['32 GB GDDR7', 'DLSS 4 with Multi Frame Generation', 'PCIe 5.0', 'Double flow-through cooler'] },
+  { id: 23, brand: 'NVIDIA', name: 'GeForce RTX 5070', category: 'Components', price: 549, rating: 4.6, reviews: 1104,
+    specs: ['12 GB GDDR7', 'DLSS 4', 'Ray tracing cores', 'PCIe 5.0'] },
+  { id: 24, brand: 'AMD', name: 'Ryzen 7 9800X3D', category: 'Components', price: 449, was: 479, rating: 4.9, reviews: 2380,
+    specs: ['8 cores / 16 threads', '2nd-gen 3D V-Cache', 'Up to 5.2 GHz', 'AM5 socket'] },
+  { id: 25, brand: 'Samsung', name: '990 PRO 2 TB NVMe SSD', category: 'Components', price: 169, was: 199, rating: 4.9, reviews: 4510,
+    specs: ['Up to 7,450 MB/s read', 'PCIe 4.0 NVMe', 'Heatsink option', '5-year warranty'] },
+  { id: 26, brand: 'Corsair', name: 'Vengeance 32 GB DDR5-6000', category: 'Components', price: 109, rating: 4.8, reviews: 3020,
+    specs: ['2×16 GB kit', '6000 MT/s, CL30', 'Intel XMP / AMD EXPO', 'Low-profile heat spreader'] },
+
+  // Audio
+  { id: 27, brand: 'Apple', name: 'AirPods Pro 3', category: 'Audio', price: 249, rating: 4.7, reviews: 3890,
+    specs: ['Active Noise Cancellation', 'Heart-rate sensing', 'Up to 8 hours listening', 'USB-C MagSafe case'] },
+  { id: 28, brand: 'Sony', name: 'WH-1000XM6', category: 'Audio', price: 429, was: 449, rating: 4.8, reviews: 1430,
+    specs: ['Industry-leading noise cancelling', '30-hour battery', 'Foldable design', 'Multipoint Bluetooth'] },
+  { id: 29, brand: 'Samsung', name: 'Galaxy Buds3 Pro', category: 'Audio', price: 199, was: 249, rating: 4.4, reviews: 870,
+    specs: ['Adaptive ANC', '24-bit Hi-Fi audio', 'IP57', 'Wireless charging case'] },
+
+  // Accessories
+  { id: 30, brand: 'Logitech', name: 'MX Master 3S Mouse', category: 'Accessories', price: 99, rating: 4.8, reviews: 6120,
+    specs: ['8K DPI sensor', 'Quiet clicks', 'MagSpeed scroll wheel', 'Up to 70 days battery'] },
+  { id: 31, brand: 'Logitech', name: 'MX Keys S Keyboard', category: 'Accessories', price: 109, rating: 4.7, reviews: 3340,
+    specs: ['Smart backlighting', 'Multi-device (3)', 'USB-C rechargeable', 'Mac & Windows layouts'] },
+  { id: 32, brand: 'Apple', name: 'Magic Keyboard with Touch ID', category: 'Accessories', price: 149, rating: 4.6, reviews: 1270,
+    specs: ['Touch ID for Mac', 'Numeric keypad', 'USB-C charging', 'Wireless'] },
+  { id: 33, brand: 'Razer', name: 'BlackWidow V4 Pro', category: 'Accessories', price: 199, was: 229, rating: 4.6, reviews: 905,
+    specs: ['Razer mechanical switches', 'Command dial + macro keys', 'Chroma RGB', 'Magnetic wrist rest'] },
 ];
 
 const CATEGORIES = ['All', ...Object.keys(ICONS)];
+const FEATURED_BRANDS = ['Apple', 'ASUS', 'Samsung', 'Dell', 'Lenovo', 'HP', 'Microsoft', 'Google', 'Sony', 'NVIDIA', 'AMD', 'Logitech'];
+const BRANDS = ['All brands', ...[...new Set(PRODUCTS.map(p => p.brand))].sort()];
 const money = n => n.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 const stars = r => '★'.repeat(Math.round(r)) + '☆'.repeat(5 - Math.round(r));
 const $ = s => document.querySelector(s);
 
 // ---------- State ----------
-const state = { category: 'All', query: '', sort: 'featured' };
+const state = { category: 'All', brand: 'All brands', query: '', sort: 'featured' };
 let cart = load();
 
 function load() {
@@ -71,6 +120,12 @@ function save() {
 }
 
 // ---------- Rendering ----------
+function renderBrands() {
+  $('#brandSelect').innerHTML = BRANDS.map(b => `<option${b === state.brand ? ' selected' : ''}>${b}</option>`).join('');
+  $('#brandStrip').innerHTML = FEATURED_BRANDS.map(b =>
+    `<button class="brand-tile${b === state.brand ? ' active' : ''}" data-brand="${b}">${b}<small>${(n => `${n} product${n === 1 ? '' : 's'}`)(PRODUCTS.filter(p => p.brand === b).length)}</small></button>`).join('');
+}
+
 function renderCategories() {
   $('#categories').innerHTML = CATEGORIES.map(c =>
     `<button class="chip" role="tab" aria-selected="${c === state.category}" data-cat="${c}">${c}</button>`).join('');
@@ -80,7 +135,8 @@ function filtered() {
   const q = state.query.trim().toLowerCase();
   let list = PRODUCTS.filter(p =>
     (state.category === 'All' || p.category === state.category) &&
-    (!q || (p.name + ' ' + p.category + ' ' + p.specs.join(' ')).toLowerCase().includes(q)));
+    (state.brand === 'All brands' || p.brand === state.brand) &&
+    (!q || (p.brand + ' ' + p.name + ' ' + p.category + ' ' + p.specs.join(' ')).toLowerCase().includes(q)));
   const sorters = {
     'price-asc': (a, b) => a.price - b.price,
     'price-desc': (a, b) => b.price - a.price,
@@ -95,19 +151,20 @@ function renderProducts() {
   $('#resultCount').textContent = `${list.length} product${list.length === 1 ? '' : 's'}`;
   $('#products').innerHTML = list.length ? list.map(p => `
     <article class="card">
-      <button class="card-media" style="background:${GRADIENTS[p.category]}" data-view="${p.id}" aria-label="View ${p.name}">
+      <button class="card-media" style="background:${GRADIENTS[p.category]}" data-view="${p.id}" aria-label="View ${p.brand} ${p.name}">
+        <span class="brand-tag">${p.brand}</span>
         ${p.was ? `<span class="badge">-${Math.round((1 - p.price / p.was) * 100)}%</span>` : ''}
         ${ICONS[p.category]}
       </button>
       <div class="card-body">
-        <span class="card-cat">${p.category}</span>
-        <h3 class="card-title">${p.name}</h3>
+        <span class="card-cat">${p.brand} · ${p.category}</span>
+        <h3 class="card-title">${p.brand} ${p.name}</h3>
         <div class="rating">${stars(p.rating)} <span>${p.rating} (${p.reviews})</span></div>
         <div class="price"><strong>${money(p.price)}</strong>${p.was ? `<s>${money(p.was)}</s>` : ''}</div>
         <button class="btn btn-primary" data-add="${p.id}">Add to cart</button>
       </div>
     </article>`).join('')
-    : `<p class="empty">No products match “${state.query.replace(/[<>&"]/g, "")}”. Try another search.</p>`;
+    : `<p class="empty">No products match your filters. Try another search, brand or category.</p>`;
 }
 
 function openProduct(id) {
@@ -119,8 +176,8 @@ function openProduct(id) {
       <div class="modal-media" style="background:${GRADIENTS[p.category]}">${ICONS[p.category]}</div>
       <div class="modal-body">
         <button class="icon-btn" data-close aria-label="Close">✕</button>
-        <span class="card-cat">${p.category}</span>
-        <h3>${p.name}</h3>
+        <span class="card-cat">${p.brand} · ${p.category}</span>
+        <h3>${p.brand} ${p.name}</h3>
         <div class="rating">${stars(p.rating)} <span>${p.rating} · ${p.reviews} reviews</span></div>
         <div class="price"><strong>${money(p.price)}</strong>${p.was ? `<s>${money(p.was)}</s>` : ''}</div>
         <ul class="specs">${p.specs.map(s => `<li>${s}</li>`).join('')}</ul>
@@ -142,7 +199,7 @@ function addToCart(id, qty = 1) {
   cart[id] = Math.min(10, (cart[id] || 0) + qty);
   save(); renderCart();
   const p = PRODUCTS.find(x => x.id === id);
-  toast(`Added ${p.name} to cart`);
+  toast(`Added ${p.brand} ${p.name} to cart`);
   const c = $('#cartCount'); c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump');
 }
 
@@ -166,7 +223,7 @@ function renderCart() {
     return `<div class="line">
       <div class="line-thumb" style="background:${GRADIENTS[p.category]}">${ICONS[p.category]}</div>
       <div>
-        <div class="line-title">${p.name}</div>
+        <div class="line-title">${p.brand} ${p.name}</div>
         <div class="line-meta">
           <div class="qty"><button data-dec="${id}" aria-label="Decrease">−</button><span>${q}</span><button data-inc="${id}" aria-label="Increase">+</button></div>
           <button class="line-remove" data-remove="${id}">Remove</button>
@@ -235,10 +292,15 @@ function toast(msg) {
 
 // ---------- Events ----------
 document.addEventListener('click', e => {
-  const el = e.target.closest('[data-cat],[data-add],[data-view],[data-inc],[data-dec],[data-remove],[data-checkout],[data-back],[data-closecart],[data-jump]');
+  const el = e.target.closest('[data-brand],[data-cat],[data-add],[data-view],[data-inc],[data-dec],[data-remove],[data-checkout],[data-back],[data-closecart],[data-jump]');
   if (!el) return;
   const d = el.dataset;
-  if (d.cat) { state.category = d.cat; renderCategories(); renderProducts(); }
+  if (d.brand) {
+    state.brand = state.brand === d.brand ? 'All brands' : d.brand;
+    state.category = 'All'; renderBrands(); renderCategories(); renderProducts();
+    document.getElementById('shop').scrollIntoView({ block: 'start' });
+  }
+  else if (d.cat) { state.category = d.cat; renderCategories(); renderProducts(); }
   else if (d.jump) { state.category = d.jump; renderCategories(); renderProducts(); }
   else if (d.add) addToCart(+d.add);
   else if (d.view) openProduct(+d.view);
@@ -262,6 +324,7 @@ $('#search').addEventListener('input', e => {
   if (state.query && shop.getBoundingClientRect().top > window.innerHeight * 0.6) shop.scrollIntoView({ block: 'start' });
 });
 $('#sort').onchange = e => { state.sort = e.target.value; renderProducts(); };
+$('#brandSelect').onchange = e => { state.brand = e.target.value; renderBrands(); renderProducts(); };
 $('#newsletter').onsubmit = e => { e.preventDefault(); e.target.reset(); toast('Thanks for subscribing!'); };
 $('#year').textContent = new Date().getFullYear();
 
@@ -285,6 +348,7 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
 
+renderBrands();
 renderCategories();
 renderProducts();
 renderCart();

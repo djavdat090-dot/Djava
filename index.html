@@ -39,14 +39,14 @@
         <div class="hero-copy">
           <p class="eyebrow">Winter Tech Sale · up to 25% off</p>
           <h1>Power up your setup.</h1>
-          <p class="lead">Laptops, gaming rigs, monitors and components — hand-picked, tested, and shipped free on orders over $99.</p>
+          <p class="lead">Apple, ASUS, Samsung, Dell, Lenovo and more — laptops, phones, gaming rigs and components, shipped free on orders over $99.</p>
           <div class="hero-cta">
             <a href="#shop" class="btn btn-primary">Shop now</a>
-            <a href="#shop" class="btn btn-ghost" data-jump="Laptops">Browse laptops</a>
+            <a href="#brands" class="btn btn-ghost">Shop by brand</a>
           </div>
           <ul class="perks">
             <li>Free shipping $99+</li>
-            <li>2-year warranty</li>
+            <li>Official manufacturer warranty</li>
             <li>30-day returns</li>
           </ul>
         </div>
@@ -73,9 +73,18 @@
       </div>
     </section>
 
+    <section id="brands" class="container brands">
+      <h2>Shop by brand</h2>
+      <div class="brand-strip" id="brandStrip"></div>
+    </section>
+
     <section id="shop" class="container shop">
       <div class="shop-head">
         <h2>Shop all products</h2>
+        <div class="filters">
+        <label class="sort">Brand
+          <select id="brandSelect"></select>
+        </label>
         <label class="sort">Sort
           <select id="sort">
             <option value="featured">Featured</option>
@@ -84,6 +93,7 @@
             <option value="rating">Top rated</option>
           </select>
         </label>
+        </div>
       </div>
       <div class="chips" id="categories" role="tablist" aria-label="Categories"></div>
       <p class="result-count" id="resultCount"></p>
@@ -100,13 +110,13 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div><span class="logo"><span class="logo-mark">D</span><span>Djava<b>Tech</b></span></span>
-        <p>Computers & electronics for work and play.</p></div>
+        <p>Authorized reseller of Apple, ASUS, Samsung, Dell, Lenovo and more.</p></div>
       <form class="newsletter" id="newsletter">
         <label for="email">Get deals in your inbox</label>
         <div><input id="email" type="email" required autocomplete="email" inputmode="email" placeholder="you@example.com"><button class="btn btn-primary">Subscribe</button></div>
       </form>
     </div>
-    <p class="container copyright">© <span id="year"></span> Djava Tech. Demo store — no real payments are processed.</p>
+    <p class="container copyright">© <span id="year"></span> Djava Tech. Demo store — prices are examples and no real payments are processed. Product and brand names are trademarks of their respective owners.</p>
   </footer>
 
   <!-- Product modal -->

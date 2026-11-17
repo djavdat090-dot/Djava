@@ -262,3 +262,32 @@ button, a, .chip { -webkit-tap-highlight-color: transparent; touch-action: manip
   .features { padding-bottom: 40px; }
 }
 @keyframes sheet { from { transform: translateY(100%); } }
+
+/* ---------- Brands ---------- */
+.brands { padding: 40px 0 0; scroll-margin-top: 80px; }
+.brands h2 { margin: 0 0 16px; font-size: 1.6rem; }
+.brand-strip { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.brand-tile {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  min-height: 84px; padding: 12px; border-radius: var(--radius); border: 1px solid var(--border);
+  background: var(--surface); color: var(--text); font-weight: 700; font-size: 1.1rem; letter-spacing: -.01em;
+  box-shadow: var(--shadow); transition: border-color .15s, transform .15s;
+}
+.brand-tile small { color: var(--muted); font-weight: 500; font-size: .75rem; letter-spacing: 0; }
+.brand-tile:hover { border-color: var(--primary); }
+.brand-tile.active { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 10%, var(--surface)); color: var(--primary); }
+.brand-tag {
+  position: absolute; top: 12px; right: 12px; padding: 3px 10px; border-radius: 999px;
+  background: rgba(255, 255, 255, .22); color: #fff; font-weight: 700; font-size: .75rem; backdrop-filter: blur(4px);
+}
+.filters { display: flex; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 860px) { .brand-strip { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 560px) {
+  .brands { padding-top: 24px; scroll-margin-top: 140px; }
+  .brands h2 { font-size: 1.3rem; }
+  .brand-strip { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .brand-tile { min-height: 68px; font-size: .95rem; }
+  .filters { width: 100%; }
+  .filters .sort { flex: 1; }
+  .filters select { flex: 1; min-width: 0; }
+}
