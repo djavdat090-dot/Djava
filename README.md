@@ -24,7 +24,23 @@ python3 -m http.server 8000
 
 Installing the site as an app and using it offline only work when it is served over http or https, not opened as a file.
 
-Products are defined in the `PRODUCTS` array at the top of `app.js`. Prices are examples; update them to your real prices before selling.
+Products are stored in `products.js`. Prices are examples; update them to your real prices before selling.
+
+## Admin page
+Open `admin.html` (live: https://djavdat090-dot.github.io/Djava/admin.html) to add, edit and delete
+products, set sale prices, and upload product photos.
+
+1. Create a GitHub fine-grained token at https://github.com/settings/personal-access-tokens/new
+   with access to **only this repository** and **Contents: Read and write**.
+2. On the admin page, paste the token and press **Connect**.
+3. Make your changes, then press **Publish to store**. The admin page saves `products.js`
+   (and any uploaded photos in `images/`) to the repository, and the live site updates in 1–2 minutes.
+
+Unpublished changes are kept in your browser. Without a token you can still use
+**Download products.js** and replace the file by hand.
+
+The admin page has no password of its own: only someone with a GitHub token that can
+write to this repository can change the store.
 
 ## Live site (GitHub Pages)
 https://djavdat090-dot.github.io/Djava/

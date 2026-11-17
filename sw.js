@@ -1,6 +1,6 @@
 // Caches the store's files so it opens fast and works offline.
-const CACHE = 'djava-v2';
-const FILES = ['./', 'index.html', 'styles.css', 'app.js', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png'];
+const CACHE = 'djava-v3';
+const FILES = ['./', 'index.html', 'styles.css', 'app.js', 'products.js', 'admin.html', 'admin.js', 'admin.css', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));

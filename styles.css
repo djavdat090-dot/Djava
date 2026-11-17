@@ -24,6 +24,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
@@ -291,3 +292,11 @@ button, a, .chip { -webkit-tap-highlight-color: transparent; touch-action: manip
   .filters .sort { flex: 1; }
   .filters select { flex: 1; min-width: 0; }
 }
+
+/* ---------- Product photos ---------- */
+:root { --photo-bg: #ffffff; }
+.card-media img, .modal-media img, .line-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 8%; }
+.line-thumb { overflow: hidden; border: 1px solid var(--border); }
+.line-thumb img { padding: 4px; }
+.card-media:has(img) .brand-tag { background: var(--text); color: var(--bg); }
+.modal-media:has(img) { min-height: 260px; }

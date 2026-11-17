@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#5b4cf0">
+  <title>Djava Tech Admin</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><span class="logo-mark">D</span><span>Djava<b>Tech</b></span></a>
+      <span class="admin-badge">Admin</span>
+      <a href="index.html" class="btn btn-ghost view-store">View store</a>
+    </div>
+  </header>
+
+  <main class="container admin-main">
+    <!-- Connection -->
+    <section class="panel" id="connectPanel">
+      <div class="panel-head">
+        <div>
+          <h2>Connect to GitHub</h2>
+          <p class="muted">The store is hosted on GitHub Pages, so products are saved to <code>products.js</code> in your repository. Connect once to publish changes for every visitor.</p>
+        </div>
+        <span class="status" id="status">Not connected</span>
+      </div>
+      <form id="connectForm" class="admin-form">
+        <div class="grid-3">
+          <label>Owner<input name="owner" required autocomplete="off" spellcheck="false"></label>
+          <label>Repository<input name="repo" required autocomplete="off" spellcheck="false"></label>
+          <label>Branch<input name="branch" required autocomplete="off" spellcheck="false"></label>
+        </div>
+        <label>GitHub access token
+          <input name="token" type="password" required autocomplete="off" spellcheck="false" placeholder="github_pat_…">
+        </label>
+        <p class="hint">Create a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">fine-grained token</a> with access to <b>only this repository</b> and the <b>Contents: Read and write</b> permission. Anyone with the token can change your store, so never share it.</p>
+        <label class="check"><input type="checkbox" name="remember"> Remember the token on this device</label>
+        <div class="actions">
+          <button class="btn btn-primary">Connect</button>
+          <button type="button" class="btn btn-ghost" id="disconnect" hidden>Disconnect</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Publish bar -->
+    <section class="publish-bar" id="publishBar">
+      <div>
+        <strong id="changeCount">No unpublished changes</strong>
+        <span class="muted" id="publishNote">Changes are kept in this browser until you publish.</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost" id="discard">Discard changes</button>
+        <button class="btn btn-ghost" id="download">Download products.js</button>
+        <button class="btn btn-primary" id="publish">Publish to store</button>
+      </div>
+    </section>
+
+    <!-- Product form -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2 id="formTitle">Add a product</h2>
+        <button class="btn btn-ghost" id="cancelEdit" hidden>Cancel editing</button>
+      </div>
+      <form id="productForm" class="admin-form" novalidate>
+        <div class="grid-3">
+          <label>Brand *<input name="brand" list="brandList" required placeholder="e.g. Apple"></label>
+          <label class="span-2">Product name *<input name="name" required placeholder='e.g. MacBook Air 13" (M4)'></label>
+        </div>
+        <div class="grid-3">
+          <label>Category *<select name="category" required></select></label>
+          <label>Price (USD) *<input name="price" type="number" min="0.01" step="0.01" inputmode="decimal" required placeholder="999"></label>
+          <label>Old price <span class="muted">(shows a sale badge)</span><input name="was" type="number" min="0" step="0.01" inputmode="decimal" placeholder="1199"></label>
+        </div>
+        <div class="grid-2">
+          <label>Rating <span class="muted">(0–5)</span><input name="rating" type="number" min="0" max="5" step="0.1" inputmode="decimal" placeholder="4.7"></label>
+          <label>Number of reviews<input name="reviews" type="number" min="0" step="1" inputmode="numeric" placeholder="120"></label>
+        </div>
+        <label>Specs <span class="muted">(one per line)</span>
+          <textarea name="specs" rows="5" placeholder="Apple M4 chip&#10;16 GB memory&#10;256 GB SSD"></textarea>
+        </label>
+        <div class="image-row">
+          <div class="image-preview" id="imagePreview"></div>
+          <div class="image-inputs">
+            <label>Photo URL <span class="muted">(optional)</span><input name="image" placeholder="https://… or images/photo.jpg" inputmode="url" spellcheck="false"></label>
+            <label class="upload" id="uploadLabel">
+              <input type="file" id="imageFile" accept="image/png,image/jpeg,image/webp">
+              <span>…or upload a photo</span>
+            </label>
+            <p class="hint" id="uploadHint">Uploading needs a GitHub connection. Max 2 MB. Without a photo, the category icon is shown.</p>
+          </div>
+        </div>
+        <p class="form-error" id="formError" role="alert"></p>
+        <div class="actions">
+          <button class="btn btn-primary" id="saveBtn">Add product</button>
+        </div>
+        <datalist id="brandList"></datalist>
+      </form>
+    </section>
+
+    <!-- Product list -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Products <span class="muted" id="productTotal"></span></h2>
+        <input type="search" id="filter" class="filter-input" placeholder="Filter products…" aria-label="Filter products">
+      </div>
+      <div class="product-table" id="productTable"></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="products.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
