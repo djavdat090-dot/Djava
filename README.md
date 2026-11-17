@@ -25,3 +25,10 @@ python3 -m http.server 8000
 Installing the site as an app and using it offline only work when it is served over http or https, not opened as a file.
 
 Products are defined in the `PRODUCTS` array at the top of `app.js`. Prices are examples; update them to your real prices before selling.
+
+## Live site (GitHub Pages)
+https://djavdat090-dot.github.io/Djava/
+
+To publish: repository **Settings → Pages → Build and deployment → Source: Deploy from a branch**,
+pick the branch with the site and the `/ (root)` folder, then **Save**. Updates go live
+a minute or two after each push.
