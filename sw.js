@@ -1,7 +1,7 @@
 // Caches the store's files so it still opens offline.
 // Always asks the network first (skipping the browser's HTTP cache), so updates show up right away.
-const CACHE = 'djava-v8';
-const FILES = ['./', 'index.html', 'styles.css', 'app.js', 'products.js', 'admin.html', 'admin.js', 'admin.css', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png'];
+const CACHE = 'djava-v10';
+const FILES = ['./', 'index.html', 'styles.css', 'app.js', 'vika.js', 'products.js', 'admin.html', 'admin.js', 'admin.css', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES.map(f => new Request(f, { cache: 'reload' })))).then(() => self.skipWaiting()));
